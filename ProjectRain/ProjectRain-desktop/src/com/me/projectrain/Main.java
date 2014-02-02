@@ -8,8 +8,8 @@ public class Main {
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 		cfg.title = "ProjectRain";
 		cfg.useGL20 = false;
-		cfg.width = 480;
-		cfg.height = 320;
+		cfg.width = 1024;
+		cfg.height = 780;
 		
 		new LwjglApplication(new ProjectRain(), cfg);
 	}
