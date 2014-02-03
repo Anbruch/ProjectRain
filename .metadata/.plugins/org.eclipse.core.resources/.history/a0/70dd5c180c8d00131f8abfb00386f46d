@@ -1,0 +1,9 @@
+package projectrain.tools;
+
+public class WorldController {
+	
+	public WorldControlller(){
+		
+	}
+
+}

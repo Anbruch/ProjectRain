@@ -1,0 +1,24 @@
+package projectrain.game_objects;
+
+import projectrain.tools.Assets;
+
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
+public class Guy {
+	
+	TextureRegion image;
+	
+	public Guy(){
+		image = Assets.instance.guy.guy;
+		
+	}
+	public void render(SpriteBatch batch){
+		
+		batch.draw(image.getTexture(), 2, 2, 0, 0, 2, 2, 1, 1, 0, image.getRegionX(), image.getRegionY(), image.getRegionWidth(), image.getRegionHeight(), false, false);
+	}
+	public void update(float deltaTime){
+		
+	}
+	
+}

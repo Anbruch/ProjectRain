@@ -1,0 +1,17 @@
+package projectrain.game_objects;
+
+import projectrain.tools.Assets;
+
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
+public class Guy {
+	
+	TextureRegion image;
+	
+	public Guy(){
+		image = Assets.instance.guy.guy;
+		
+	}
+	
+	
+}

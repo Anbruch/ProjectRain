@@ -1,0 +1,9 @@
+package projectrain.game_objects;
+
+public class Guy {
+	
+	TextureRegion reg;
+	public Guy(){
+		
+	}
+}

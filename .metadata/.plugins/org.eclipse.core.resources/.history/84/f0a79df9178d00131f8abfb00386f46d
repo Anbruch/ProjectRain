@@ -1,0 +1,8 @@
+package projectrain.game_objects;
+
+public class Guy {
+	
+	public Guy(){
+		
+	}
+}

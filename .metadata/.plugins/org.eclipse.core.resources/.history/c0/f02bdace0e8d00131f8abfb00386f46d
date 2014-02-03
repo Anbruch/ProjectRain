@@ -1,0 +1,14 @@
+package projectrain.tools;
+
+import com.badlogic.gdx.graphics.OrthographicCamera;
+
+public class WorldRenderer {
+	public static WorldRenderer renderer = new WorldRenderer();
+	
+	OrthographicCamera camera;
+	
+	private WorldRenderer(){
+		
+	}
+
+}

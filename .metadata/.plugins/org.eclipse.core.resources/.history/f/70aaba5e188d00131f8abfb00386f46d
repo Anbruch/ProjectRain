@@ -1,0 +1,42 @@
+package projectrain.tools;
+
+import com.badlogic.gdx.assets.AssetDescriptor;
+import com.badlogic.gdx.assets.AssetErrorListener;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
+import com.badlogic.gdx.utils.Disposable;
+
+public class Assets implements Disposable, AssetErrorListener{
+	public static Assets instance = new Assets();
+	private AssetManager assetManager;
+	
+	private Assets(){
+		
+	}
+	public void init(){
+		
+		
+		
+	}
+	private void init(AssetManager assetManager){
+		this.assetManager = assetManager; 
+	}
+
+	@Override
+	public void error(AssetDescriptor asset, Throwable throwable) {
+		
+	}
+
+	@Override
+	public void dispose() {
+		
+	}
+	public class Guy{
+		public final AtlasRegion guy;
+		public Guy(TextureAtlas atlas){
+			guy = atlas.findRegion("fag");
+		}
+	}
+
+}
