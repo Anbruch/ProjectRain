@@ -1,0 +1,20 @@
+package projectrain.tools;
+
+import projectrain.game_objects.Guy;
+import projectrain.game_objects.terrain.Platform;
+
+public class LevelStage {
+	
+	private Platform platform;
+	private Guy guy;
+
+	public LevelStage(){
+		guy = new Guy();
+		platform = new Platform(30, 40, 500, 50);
+	}
+	
+	public void update(float deltaTime){
+		
+	}
+
+}

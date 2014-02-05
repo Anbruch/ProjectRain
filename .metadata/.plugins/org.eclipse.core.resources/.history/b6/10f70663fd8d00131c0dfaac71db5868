@@ -1,0 +1,25 @@
+package projectrain.tools;
+
+import com.badlogic.gdx.Gdx;
+
+import projectrain.game_objects.Guy;
+
+public class WorldController {
+	public static WorldController controller = new WorldController();
+	private CameraHelper cameraHelper;
+	private LevelStage levelStage;
+	
+	private WorldController(){
+		
+	}
+	public void init(){
+		Gdx.input.setInputProcessor(this);
+		levelStage = new LevelStage();
+	}
+	
+	public void update(float deltaTime){
+		
+		levelStage.update(deltaTime);
+	}
+
+}

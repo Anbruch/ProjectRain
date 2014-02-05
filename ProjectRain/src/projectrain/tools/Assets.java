@@ -10,7 +10,8 @@ import com.badlogic.gdx.utils.Disposable;
 public class Assets implements Disposable, AssetErrorListener{
 	public static Assets instance = new Assets();
 	private AssetManager assetManager;
-	public Guy guy;
+	public ScytheMan scytheMan;
+	public Platform platform;
 	
 	private Assets(){
 		
@@ -26,8 +27,8 @@ public class Assets implements Disposable, AssetErrorListener{
 		assetManager.finishLoading();
 		
 		TextureAtlas atlas = assetManager.get("images/ProjectRain.pack");
-		
-		guy = new Guy(atlas);
+		platform = new Platform(atlas);
+		scytheMan = new ScytheMan(atlas);
 	}
 
 	@Override
@@ -39,11 +40,19 @@ public class Assets implements Disposable, AssetErrorListener{
 	public void dispose() {
 		
 	}
+	public class Platform{
+		public final AtlasRegion platform;
+		public Platform(TextureAtlas atlas){
+			platform = atlas.findRegion("platform");
+		}
+	}
 	
-	public class Guy{
-		public final AtlasRegion guy;
-		public Guy(TextureAtlas atlas){
-			guy = atlas.findRegion("fag");
+	public class ScytheMan{
+		public final AtlasRegion scytheMan;
+		
+		public ScytheMan(TextureAtlas atlas){
+
+			scytheMan = atlas.findRegion("ScytheMan");
 		}
 	}
 

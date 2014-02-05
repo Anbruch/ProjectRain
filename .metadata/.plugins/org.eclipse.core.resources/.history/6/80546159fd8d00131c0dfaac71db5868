@@ -1,0 +1,22 @@
+package projectrain.tools;
+
+import projectrain.game_objects.Guy;
+
+public class WorldController {
+	public static WorldController controller = new WorldController();
+	private CameraHelper cameraHelper;
+	private LevelStage levelStage;
+	
+	private WorldController(){
+		
+	}
+	public void init(){
+		levelStage = new LevelStage();
+	}
+	
+	public void update(float deltaTime){
+		
+		levelStage.update(deltaTime);
+	}
+
+}

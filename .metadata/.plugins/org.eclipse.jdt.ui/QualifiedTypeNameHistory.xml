@@ -8,7 +8,10 @@
 <fullyQualifiedTypeName name="com.badlogic.gdx.utils.Disposable"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.tools.imagepacker.TexturePacker2.Settings"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.tools.imagepacker.TexturePacker2"/>
-<fullyQualifiedTypeName name="projectrain.tools.Assets"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.graphics.g2d.TextureAtlas"/>
 <fullyQualifiedTypeName name="projectrain.game_objects.Guy"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.Gdx"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.graphics.g2d.TextureRegion"/>
+<fullyQualifiedTypeName name="projectrain.tools.Assets"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.math.Rectangle"/>
 </qualifiedTypeNameHistroy>

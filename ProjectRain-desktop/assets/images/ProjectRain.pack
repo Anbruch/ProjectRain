@@ -3,17 +3,17 @@ ProjectRain.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-fag
+platform
   rotate: false
-  xy: 1, 1
-  size: 100, 100
-  orig: 100, 100
+  xy: 1, 35
+  size: 178, 12
+  orig: 178, 12
   offset: 0, 0
   index: -1
-floor
+ScytheMan
   rotate: false
-  xy: 103, 60
-  size: 100, 41
-  orig: 100, 41
+  xy: 1, 1
+  size: 42, 32
+  orig: 42, 32
   offset: 0, 0
   index: -1

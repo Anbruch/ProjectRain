@@ -1,0 +1,13 @@
+package projectrain.game_objects.terrain;
+
+import com.badlogic.gdx.math.Rectangle;
+
+public class Platform extends AbstractgameObject{
+	
+	
+	
+	public Platform(){
+		
+	}
+
+}

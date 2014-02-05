@@ -36,9 +36,10 @@ public class ProjectRain implements ApplicationListener {
 		if(!paused){
 			WorldController.controller.update(Gdx.graphics.getDeltaTime());
 		}
-		
-		
-		Gdx.gl.glClearColor(1, 1, 1, 0); //Default background color
+		/*
+		Midnight Blue 2F2F4F
+		Violet 4F2F4F*/
+		Gdx.gl.glClearColor(25, 25, 112, 0); //Default background color
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
 		WorldRenderer.renderer.render();

@@ -1,0 +1,20 @@
+package projectrain.game_objects.classes;
+
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
+import projectrain.game_objects.AbstractGameObject;
+
+public class ScytheMan extends AbstractGameObject {
+
+	public ScytheMan(){
+		
+	}
+	public ScytheMan(float x, float y, float width, float  height){
+		
+	}
+	@Override
+	public void render(SpriteBatch batch) {
+
+	}
+
+}
