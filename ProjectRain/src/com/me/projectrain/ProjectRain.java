@@ -1,7 +1,8 @@
 package com.me.projectrain;
 
 import projectrain.tools.Assets;
-import projectrain.tools.WorldController;
+import projectrain.tools.InputManager;
+import projectrain.tools.World;
 import projectrain.tools.WorldRenderer;
 
 import com.badlogic.gdx.ApplicationListener;
@@ -21,7 +22,8 @@ public class ProjectRain implements ApplicationListener {
 	public void create() {	
 		
 		Assets.instance.init(new AssetManager());//Make the Spritesheet to be cut from later
-		WorldController.controller.init();
+		InputManager.inputManager.init();
+		World.controller.init();
 		WorldRenderer.renderer.init();
 		paused = false;
 	}
@@ -34,7 +36,7 @@ public class ProjectRain implements ApplicationListener {
 	@Override
 	public void render() {		
 		if(!paused){
-			WorldController.controller.update(Gdx.graphics.getDeltaTime());
+			World.controller.update(Gdx.graphics.getDeltaTime());
 		}
 		/*
 		Midnight Blue 2F2F4F

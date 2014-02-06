@@ -1,0 +1,138 @@
+package projectrain.game_objects.classes;
+
+import projectrain.game_objects.AbstractGameObject;
+import projectrain.game_objects.terrain.Platform;
+import projectrain.tools.LevelStage;
+
+import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
+
+public class ManipulatableObject extends AbstractGameObject{
+	
+	private Vector2 moveSpeed; 
+	private VIEW_DIRECTION viewDirection;
+	private STATE state;
+	private AbstractGameObject target;
+	private boolean right, left;
+	
+	public enum VIEW_DIRECTION{
+		left, right
+	}
+	public enum STATE{
+		JUMPING, GROUNDED
+	}
+	public ManipulatableObject(){
+		
+		moveSpeed = new Vector2(400, 0);
+		viewDirection = VIEW_DIRECTION.right;
+		state = STATE.JUMPING;
+		objRect = new Rectangle(bounds);
+		
+	}
+	
+	public void actOnInputKeyDown(int keycode){
+		//Movement, same among all characters
+		switch(keycode){
+		//LEFT
+		case Keys.LEFT:
+			
+			moveLeft();
+			break;
+		//RIGHT
+		case Keys.RIGHT:
+			
+			moveRight();
+			break;
+		//DOWN
+		case Keys.DOWN:
+			
+			moveDown();
+			break;
+		//UP
+		case Keys.UP:
+			
+			moveUp();
+			break;
+		}
+	}//END OF METHOD
+	public void actOnInputKeyUp(int keycode) {
+		//Movement, same among all characters
+		switch(keycode){
+		//LEFT
+		case Keys.LEFT:
+			
+			stopMoveLeft();
+			break;
+		//RIGHT
+		case Keys.RIGHT:
+			
+			stopMoveRight();
+			break;
+		//DOWN
+		case Keys.DOWN:
+			
+			stopMoveDown();
+			break;
+		//UP
+		case Keys.UP:
+			
+			stopMoveUp();
+			break;
+		}
+	}//End of actOnInput methods
+	
+	private void moveRight() {
+		if(left){
+			velocity.x = 0;
+			return;
+		}
+		viewDirection = VIEW_DIRECTION.right;
+		velocity.x = moveSpeed.x;
+		
+	}
+
+	private void moveLeft() {
+		viewDirection = VIEW_DIRECTION.left;
+		velocity.x = -moveSpeed.x;
+
+	}
+	private void stopMoveRight() {
+		velocity.x = 0;
+	}
+
+	private void stopMoveLeft() {
+		velocity.x = 0;
+	}
+
+	private void moveUp() {
+		
+	}
+
+	private void moveDown() {
+		
+	}
+	private void stopMoveUp() {
+		
+	}
+
+	private void stopMoveDown() {
+		
+	}
+	public void setTarget(AbstractGameObject target){
+		this.target = target;
+	}
+	
+	@Override 
+	public void update(float deltaTime){
+		super.update(deltaTime);
+	}
+	@Override
+	public void render(SpriteBatch batch) {
+		
+		batch.draw(image.getTexture(), position.x, position.y, 0, 0, dimension.x, dimension.y, 1, 1, rotation, image.getRegionX(), image.getRegionY(), image.getRegionWidth(), image.getRegionHeight(),
+				viewDirection == VIEW_DIRECTION.left, false);
+
+	}
+}

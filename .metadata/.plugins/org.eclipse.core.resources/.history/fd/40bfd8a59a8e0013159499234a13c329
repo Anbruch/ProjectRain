@@ -1,0 +1,32 @@
+package projectrain.tools;
+
+import projectrain.game_objects.classes.ScytheMan;
+import projectrain.game_objects.terrain.Platform;
+
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
+
+public class LevelStage {
+	
+	private Platform platform;
+	private ScytheMan scytheMan;
+
+	public LevelStage(){
+		scytheMan = new ScytheMan(400, 500, 84, 64);
+		platform = new Platform(30, 400, 712, 48);
+		
+	}
+	public void render(SpriteBatch batch){
+		scytheMan.render(batch);
+		platform.render(batch);
+		
+		
+	}
+	
+	public void update(float deltaTime){
+		scytheMan.update(deltaTime);
+				
+		
+	}
+
+}

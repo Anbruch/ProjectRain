@@ -1,0 +1,13 @@
+package projectrain.tools;
+
+import com.badlogic.gdx.math.Vector2;
+
+public class CameraHelper {
+
+	private Vector2 zoom;
+	
+	public CameraHelper(){
+		zoom = new Vector2();
+	}
+	
+}

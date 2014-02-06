@@ -24,14 +24,14 @@ public class Platform extends AbstractGameObject{
 		//set basic vectors of position, dimension and bounds for collision
 		position.set(x, y);
 		dimension.set(width, height);
-		bounds.set(0, 0,dimension.x, dimension.y);
+		bounds.set(position.x, position.y, dimension.x, dimension.y - dimension.y / 5);
 	}
 	
 	@Override
 	public void render(SpriteBatch batch) {
 		
-		batch.draw(image.getTexture(), position.x, position.y, bounds.width,
-				bounds.height, image.getRegionX(), image.getRegionY(),
+		batch.draw(image.getTexture(), position.x, position.y, dimension.x,
+				dimension.y, image.getRegionX(), image.getRegionY(),
 				image.getRegionWidth(), image.getRegionHeight(), false, false);
 	}
 

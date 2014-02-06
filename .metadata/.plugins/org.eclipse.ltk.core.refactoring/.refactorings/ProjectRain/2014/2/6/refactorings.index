@@ -2,3 +2,10 @@
 1391457782053	Delete element
 1391461969831	Rename type 'guy'
 1391561563868	Delete element
+1391594059401	Delete element
+1391634181367	Rename type 'WorldController'
+1391642710846	Rename type 'PlayableCharacter'
+1391669084199	Rename method 'actOnInput'
+1391671064924	Rename field 'targets'
+1391671260617	Rename field 'uncontrolledObjects'
+1391679515173	Rename local variable 'object'

@@ -12,13 +12,14 @@ public class Main {
 		if(rebuildAtlas){
 			Settings settings = new Settings();
 			TexturePacker2.process(settings, "assets-raw/images", "../ProjectRain-desktop/assets/images", "ProjectRain.pack");
-			
 		}
+		
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 		cfg.title = "ProjectRain";
 		cfg.useGL20 = false;
 		cfg.width = 1280;
 		cfg.height = 720;
+		cfg.fullscreen = true;
 		
 		new LwjglApplication(new ProjectRain(), cfg);
 	}

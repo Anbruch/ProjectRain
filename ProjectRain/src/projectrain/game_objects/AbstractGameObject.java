@@ -1,6 +1,10 @@
 package projectrain.game_objects;
 
+import projectrain.game_objects.classes.ManipulatableObject.VIEW_DIRECTION;
+import projectrain.tools.LevelStage;
+
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -17,7 +21,9 @@ public abstract class AbstractGameObject{
 	public Vector2 velocity;
 	public Vector2 terminalVelocity; //Objects max speed magnitude
 	public Rectangle bounds; // objects bounding box used for collision
-	
+	protected TextureRegion image;
+
+
 	public float rotation;
 	
 	public AbstractGameObject(){
@@ -37,27 +43,32 @@ public abstract class AbstractGameObject{
 		updateMotionX(deltaTime);
 		updateMotionY(deltaTime);
 		
-		position.x += velocity.x * deltaTime;
-		position.y += velocity.y * deltaTime;
+		
+		
+		
+		
 	}
+	
 	protected void updateMotionX(float deltaTime){
 		
 		//Apply acceleration
 		velocity.x += acceleration.x * deltaTime;
-		
+		//Make sure the object's velocity does not exceed the terminal velocity
 		velocity.x = MathUtils.clamp(velocity.x, - terminalVelocity.x,  terminalVelocity.x);
 		
-		//Make sure the object's velocity does not exceed the terminal velocity
+		
+		
 		
 	}
 	protected void updateMotionY(float deltaTime){
 		
 		velocity.y += acceleration.y * deltaTime;
-		
 		velocity.y = MathUtils.clamp(velocity.y, - terminalVelocity.y,  terminalVelocity.y);
-
 
 		
 	}
-	public abstract void render(SpriteBatch batch);
+	public void render(SpriteBatch batch){
+		batch.draw(image.getTexture(), position.x, position.y, 0, 0, dimension.x, dimension.y, 1, 1, rotation, image.getRegionX(), image.getRegionY(), image.getRegionWidth(), image.getRegionHeight(),
+				false, false);
+	}
 }

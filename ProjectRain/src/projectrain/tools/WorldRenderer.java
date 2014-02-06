@@ -25,14 +25,16 @@ public class WorldRenderer implements Disposable{
 		
 	}
 	private void renderWorld(){
+		World.controller.cameraHelper.applyTo(camera);
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 		
-		WorldController.controller.render(batch);
+		World.controller.render(batch);
 		batch.end();
 		
 	}
 	public void render(){
+		
 		renderWorld();
 		camera.update();
 	}

@@ -4,14 +4,23 @@
 <fullyQualifiedTypeName name="projectrain.tools.WorldController"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.graphics.g2d.SpriteBatch"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.graphics.OrthographicCamera"/>
-<fullyQualifiedTypeName name="com.me.projectrain.Constants"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.utils.Disposable"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.tools.imagepacker.TexturePacker2.Settings"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.tools.imagepacker.TexturePacker2"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.graphics.g2d.TextureAtlas"/>
 <fullyQualifiedTypeName name="projectrain.game_objects.Guy"/>
-<fullyQualifiedTypeName name="com.badlogic.gdx.Gdx"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.graphics.g2d.TextureRegion"/>
 <fullyQualifiedTypeName name="projectrain.tools.Assets"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.math.Vector2"/>
+<fullyQualifiedTypeName name="com.me.projectrain.Constants"/>
+<fullyQualifiedTypeName name="projectrain.game_objects.classes.PlayableCharacter"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.Input"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.InputAdapter"/>
+<fullyQualifiedTypeName name="projectrain.tools.InputManager"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.Input.Keys"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.utils.Array"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.math.Rectangle"/>
+<fullyQualifiedTypeName name="projectrain.game_objects.terrain.Platform"/>
+<fullyQualifiedTypeName name="projectrain.tools.LevelStage"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.Gdx"/>
 </qualifiedTypeNameHistroy>
