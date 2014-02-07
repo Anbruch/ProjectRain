@@ -12,7 +12,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class ManipulatableObject extends AbstractGameObject{
 	
-	private Vector2 moveSpeed; 
+	protected Vector2 moveSpeed; 
 	private VIEW_DIRECTION viewDirection;
 	private STATE state;
 	private AbstractGameObject target;
@@ -26,7 +26,6 @@ public class ManipulatableObject extends AbstractGameObject{
 	}
 	public ManipulatableObject(){
 		
-		moveSpeed = new Vector2(400, 0);
 		viewDirection = VIEW_DIRECTION.right;
 		state = STATE.JUMPING;
 		
@@ -55,8 +54,19 @@ public class ManipulatableObject extends AbstractGameObject{
 			
 			moveUp();
 			break;
+		case Keys.SPACE:
+			
+			jump();
+			break;
 		}
 	}//END OF METHOD
+	private void jump() {
+		if(state == STATE.GROUNDED){
+			velocity.y = moveSpeed.y;
+			state = STATE.JUMPING;
+		}
+	}
+
 	public void actOnInputKeyUp(int keycode) {
 		//Movement, same among all characters
 		switch(keycode){
@@ -84,14 +94,19 @@ public class ManipulatableObject extends AbstractGameObject{
 	}//End of actOnInput methods
 	
 	private void moveRight() {
+		right = true;
+
 		if(left){
+			setAnimation(aniNormal);
+
 			velocity.x = 0;
-			right = true;
 			return;
+		}
+		if(state == STATE.GROUNDED){
+			setAnimation(aniRunning);
 		}
 		viewDirection = VIEW_DIRECTION.right;
 		velocity.x = moveSpeed.x;
-		right = true;
 		
 	}
 
@@ -101,7 +116,12 @@ public class ManipulatableObject extends AbstractGameObject{
 		left = true;
 		if(right){
 			velocity.x = 0;
+			setAnimation(aniNormal);
+
 			return;
+		}
+		if(state == STATE.GROUNDED){
+			setAnimation(aniRunning);
 		}
 		viewDirection = VIEW_DIRECTION.left;
 		velocity.x = -moveSpeed.x;
@@ -112,7 +132,9 @@ public class ManipulatableObject extends AbstractGameObject{
 		
 		//Set velocity to 0, check if left might be pressed
 		velocity.x = 0;
-		right = false;
+		right = false;			
+		setAnimation(aniNormal);
+		
 		if(left){
 			moveLeft();
 		}
@@ -123,8 +145,11 @@ public class ManipulatableObject extends AbstractGameObject{
 		//Set velocity.x to 0, check if right might be pressed
 		velocity.x = 0;
 		left = false;
+		setAnimation(aniNormal);
+		
 		if(right){
 			moveRight();
+
 		}
 	}
 
@@ -149,18 +174,27 @@ public class ManipulatableObject extends AbstractGameObject{
 	@Override 
 	public void update(float deltaTime){
 		super.update(deltaTime);
+		Vector2 curPosition = new Vector2(position);
 
 		//this frames change in position
 		//Used to check for collision
-		float x, y;
-		x = velocity.x * deltaTime;
-		y = velocity.y * deltaTime;
+		float deltax, deltay;
+		deltax = velocity.x * deltaTime;
+		deltay = velocity.y * deltaTime;
 		
 		//slightly recursive, one call leads to two separate calls
-		move(x, y);
+		move(deltax, deltay);
+		
+		//set for collision
+		if(position.y == curPosition.y){
+			state = STATE.GROUNDED;
+		}
+		
+		//so you run when you land from jump
+		if(animation != aniRunning && state == STATE.GROUNDED && position.x != curPosition.x)
+			setAnimation(aniRunning);
 	}
 	private void move(float x, float y){
-		
 		//If it's the first call, break into components
 		if(x != 0 && y != 0){
 			move(x, 0);
@@ -173,6 +207,7 @@ public class ManipulatableObject extends AbstractGameObject{
 			position.x += x;
 			position.y += y;
 		}
+		
 		
 		//Just to clarify where the rectangle ended
 		bounds.setPosition(position);
@@ -190,6 +225,7 @@ public class ManipulatableObject extends AbstractGameObject{
 			
 			//If collision
 			if(bounds.overlaps(platform.bounds)){
+				position.y = platform.position.y + platform.bounds.height;
 				return true;
 			}
 		}

@@ -1,5 +1,6 @@
 package com.me.projectrain;
 
+
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.tools.imagepacker.TexturePacker2;
@@ -7,7 +8,7 @@ import com.badlogic.gdx.tools.imagepacker.TexturePacker2.Settings;
 
 public class Main {
 	
-	private static boolean rebuildAtlas = true;
+	private static boolean rebuildAtlas = false;
 	public static void main(String[] args) {
 		if(rebuildAtlas){
 			Settings settings = new Settings();

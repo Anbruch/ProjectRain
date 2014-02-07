@@ -9,3 +9,7 @@
 1391671064924	Rename field 'targets'
 1391671260617	Rename field 'uncontrolledObjects'
 1391679515173	Rename local variable 'object'
+1391724419564	Rename local variable 'deltax'
+1391724443006	Rename local variable 'deltax'
+1391760451048	Rename field 'aniNormal'
+1391760482303	Rename field 'aniNormal'

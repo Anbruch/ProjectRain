@@ -3,8 +3,10 @@ package projectrain.tools;
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetErrorListener;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 
 public class Assets implements Disposable, AssetErrorListener{
@@ -48,11 +50,20 @@ public class Assets implements Disposable, AssetErrorListener{
 	}
 	
 	public class ScytheMan{
-		public final AtlasRegion scytheMan;
+		public final Array<AtlasRegion> scytheNormal;
+		public final Array<AtlasRegion> scytheRunning;
+		public final Animation aniRunning;
+		public final Animation aniNormal;
 		
 		public ScytheMan(TextureAtlas atlas){
+			
+			scytheRunning = atlas.findRegions("Scythe_running");
+			scytheNormal = atlas.findRegions("Scythe_normal");
+			scytheNormal.add(atlas.findRegion("Scythe_normal"));
+			
+			aniRunning = new Animation(1 / 10.0f, scytheRunning, Animation.LOOP_PINGPONG);
+			aniNormal = new Animation(1 / 10.0f, scytheNormal, Animation.NORMAL);
 
-			scytheMan = atlas.findRegion("ScytheMan");
 		}
 	}
 

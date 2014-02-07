@@ -18,9 +18,10 @@
 <fullyQualifiedTypeName name="com.badlogic.gdx.InputAdapter"/>
 <fullyQualifiedTypeName name="projectrain.tools.InputManager"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.Input.Keys"/>
-<fullyQualifiedTypeName name="com.badlogic.gdx.utils.Array"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.math.Rectangle"/>
 <fullyQualifiedTypeName name="projectrain.game_objects.terrain.Platform"/>
 <fullyQualifiedTypeName name="projectrain.tools.LevelStage"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.Gdx"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.utils.Array"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.graphics.g2d.Animation"/>
 </qualifiedTypeNameHistroy>
