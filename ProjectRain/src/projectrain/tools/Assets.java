@@ -14,6 +14,7 @@ public class Assets implements Disposable, AssetErrorListener{
 	private AssetManager assetManager;
 	public ScytheMan scytheMan;
 	public Platform platform;
+	public Background nightSky;
 	
 	private Assets(){
 		
@@ -31,6 +32,7 @@ public class Assets implements Disposable, AssetErrorListener{
 		TextureAtlas atlas = assetManager.get("images/ProjectRain.pack");
 		platform = new Platform(atlas);
 		scytheMan = new ScytheMan(atlas);
+		nightSky = new Background(atlas);
 	}
 
 	@Override
@@ -64,6 +66,13 @@ public class Assets implements Disposable, AssetErrorListener{
 			aniRunning = new Animation(1 / 10.0f, scytheRunning, Animation.LOOP_PINGPONG);
 			aniNormal = new Animation(1 / 10.0f, scytheNormal, Animation.NORMAL);
 
+		}
+	}
+	
+	public class Background{
+		public final AtlasRegion nightSky;
+		public Background(TextureAtlas atlas){
+			nightSky = atlas.findRegion("NightSky");
 		}
 	}
 
