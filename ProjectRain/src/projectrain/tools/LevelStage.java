@@ -2,32 +2,30 @@ package projectrain.tools;
 
 import projectrain.game_objects.AbstractGameObject;
 import projectrain.game_objects.classes.ManipulatableObject;
-import projectrain.game_objects.classes.ScytheMan;
 import projectrain.game_objects.terrain.Platform;
+import projectrain.levels.LevelLoader;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 
 public class LevelStage {
 	
 	private Platform platform;
-	private ScytheMan scytheMan;
 	public static Array<ManipulatableObject> controllableObjects = new Array<ManipulatableObject>();
 	public static Array<AbstractGameObject> platforms = new Array<AbstractGameObject>();
+	private LevelLoader levelLoader;
+	
 	
 	public LevelStage(){
-		scytheMan = new ScytheMan(400, 500, 84, 64);
-		
-		controllableObjects.add(scytheMan);
-		for(int i = 0; i < 10; i++){
-			platforms.add(new Platform(-3000 + i * 712, 400, 712, 48));
-
+		levelLoader = new LevelLoader("levels/testLevel.png");
+		System.out.println(controllableObjects.get(0).position);
+		for(AbstractGameObject plat: LevelStage.platforms){
+			System.out.println(plat.position);
 		}
 		
-		//add to input's array to send input to player controlled objects
-		InputManager.inputManager.addObject(scytheMan);
-
+		
+		
+		
 	}
 	public void render(SpriteBatch batch){
 		
@@ -53,9 +51,5 @@ public class LevelStage {
 		
 		
 	}
-	public ManipulatableObject getPlayer() {
-
-		return scytheMan;
-	}
-
+	
 }
