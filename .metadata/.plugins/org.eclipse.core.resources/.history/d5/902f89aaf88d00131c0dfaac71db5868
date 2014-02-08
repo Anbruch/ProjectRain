@@ -1,9 +1,0 @@
-package projectrain.game_objects.terrain;
-
-public class Platform {
-	
-	public Platform(){
-		
-	}
-
-}

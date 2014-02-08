@@ -70,5 +70,9 @@ public class InputManager extends InputAdapter {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	public ManipulatableObject getPlayer() {
+		// TODO Auto-generated method stub
+		return controllableObjects.get(0);
+	}
 
 }

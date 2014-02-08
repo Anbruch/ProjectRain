@@ -1,9 +1,0 @@
-package projectrain.tools;
-
-public class Assets {
-	public static Assets instance = new Assets();
-	private Assets(){
-		
-	}
-
-}

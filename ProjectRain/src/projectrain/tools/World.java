@@ -21,7 +21,7 @@ public class World {
 		levelStage = new LevelStage();
 		
 		//have a player variable here
-		player = levelStage.getPlayer();
+		player = InputManager.inputManager.getPlayer();
 		cameraHelper.setTarget(player);	
 		
 	}

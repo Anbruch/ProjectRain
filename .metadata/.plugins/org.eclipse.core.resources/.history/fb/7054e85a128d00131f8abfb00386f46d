@@ -1,6 +1,0 @@
-package com.me.projectrain;
-
-public class Constants {
-	public static float viewportWidth = 10, viewportHeight;
-
-}
