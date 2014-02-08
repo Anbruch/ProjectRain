@@ -1,21 +1,18 @@
 package projectrain.game_objects.classes;
 
 import projectrain.game_objects.AbstractGameObject;
-import projectrain.game_objects.terrain.Platform;
 import projectrain.tools.LevelStage;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 public class ManipulatableObject extends AbstractGameObject{
 	
 	protected Vector2 moveSpeed; 
-	private VIEW_DIRECTION viewDirection;
-	private STATE state;
-	private AbstractGameObject target;
+	protected VIEW_DIRECTION viewDirection;
+	protected STATE state;
+	private AbstractGameObject target, collidingPlatform;
 	private boolean right, left;
 	
 	public enum VIEW_DIRECTION{
@@ -94,14 +91,14 @@ public class ManipulatableObject extends AbstractGameObject{
 	}//End of actOnInput methods
 	
 	private void moveRight() {
+		
 		right = true;
-
 		if(left){
 			setAnimation(aniNormal);
-
 			velocity.x = 0;
 			return;
 		}
+		//Animates the run if grounded
 		if(state == STATE.GROUNDED){
 			setAnimation(aniRunning);
 		}
@@ -120,6 +117,8 @@ public class ManipulatableObject extends AbstractGameObject{
 
 			return;
 		}
+		
+		//Sets up running animation if on ground
 		if(state == STATE.GROUNDED){
 			setAnimation(aniRunning);
 		}
@@ -132,7 +131,9 @@ public class ManipulatableObject extends AbstractGameObject{
 		
 		//Set velocity to 0, check if left might be pressed
 		velocity.x = 0;
-		right = false;			
+		right = false;	
+		
+		//Animates back to neutral
 		setAnimation(aniNormal);
 		
 		if(left){
@@ -145,11 +146,13 @@ public class ManipulatableObject extends AbstractGameObject{
 		//Set velocity.x to 0, check if right might be pressed
 		velocity.x = 0;
 		left = false;
+		//Sets animation back to neutral
 		setAnimation(aniNormal);
 		
+		//Bug fix for if both buttons are down,
+		//Left is released, then character should move right
 		if(right){
 			moveRight();
-
 		}
 	}
 
@@ -174,6 +177,8 @@ public class ManipulatableObject extends AbstractGameObject{
 	@Override 
 	public void update(float deltaTime){
 		super.update(deltaTime);
+		
+		//Used to check if grounded or not
 		Vector2 curPosition = new Vector2(position);
 
 		//this frames change in position
@@ -183,49 +188,87 @@ public class ManipulatableObject extends AbstractGameObject{
 		deltay = velocity.y * deltaTime;
 		
 		//slightly recursive, one call leads to two separate calls
-		move(deltax, deltay);
+		if(deltax == 0){
+			if(!move(deltax, deltay)){
+				if(position.y > collidingPlatform.position.y + collidingPlatform.bounds.height){
+					state = STATE.GROUNDED;
+					velocity.y = 0;
+					position.y = collidingPlatform.position.y + collidingPlatform.bounds.height;
+			
+				}else{
+					velocity.y = 0;
+					
+				}
+			}
+		}else move(deltax, deltay);
 		
-		//set for collision
+		/*//set for collision
 		if(position.y == curPosition.y){
+			velocity.y = 0;
 			state = STATE.GROUNDED;
-		}
-		
+			
+		}*/
+
 		//so you run when you land from jump
 		if(animation != aniRunning && state == STATE.GROUNDED && position.x != curPosition.x)
 			setAnimation(aniRunning);
 	}
-	private void move(float x, float y){
+	private boolean move(float deltax, float deltay){
 		//If it's the first call, break into components
-		if(x != 0 && y != 0){
-			move(x, 0);
-			move(0, y);
-			return;
+		if(deltax != 0 && deltay != 0){
+			move(deltax, 0);
+
+			if(move(0, deltay)){
+				state = STATE.JUMPING;
+				collidingPlatform = null;
+			}else{
+				if(position.y > collidingPlatform.position.y + collidingPlatform.bounds.height){
+					state = STATE.GROUNDED;
+					velocity.y = 0;
+					position.y = collidingPlatform.position.y + collidingPlatform.bounds.height;
+			
+				}else{
+					velocity.y = 0;
+				}
+			}
+			return false;
+			
 		}
 		
+		ensureCorrectCollisionBounds();
+
 		//Collision Check this object once for x, once for y
-		if(!collision(x, y)){
-			position.x += x;
-			position.y += y;
+		if(!collision(deltax, deltay)){
+			position.x += deltax;
+			if(deltay != 0){
+				position.y += deltay;
+				return true;
+			}
+
 		}
-		
 		
 		//Just to clarify where the rectangle ended
 		bounds.setPosition(position);
+		return false;
 		
 	}
-	private boolean collision(float x, float y){
+	protected void ensureCorrectCollisionBounds() {
+		
+	}
+
+	private boolean collision(float deltax, float deltay){
 		
 		//Set bounds to where this object will be after adding
 		//the velocity of this frame to check and see if we are
 		//going to collide with anything
-		bounds.setPosition(position.x + x, position.y + y);
+		bounds.setPosition(bounds.x + deltax, position.y + deltay);
 		
 		//Iterate through platforms
 		for(AbstractGameObject platform: LevelStage.platforms){
 			
 			//If collision
 			if(bounds.overlaps(platform.bounds)){
-				position.y = platform.position.y + platform.bounds.height;
+				collidingPlatform = platform;
 				return true;
 			}
 		}

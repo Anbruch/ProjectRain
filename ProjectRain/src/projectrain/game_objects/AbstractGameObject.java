@@ -71,7 +71,6 @@ public abstract class AbstractGameObject{
 		
 		velocity.y += acceleration.y * deltaTime;
 		velocity.y = MathUtils.clamp(velocity.y, - terminalVelocity.y,  terminalVelocity.y);
-
 		
 	}
 	public void render(SpriteBatch batch){

@@ -19,7 +19,7 @@ public class ScytheMan extends ManipulatableObject {
 		aniNormal = Assets.instance.scytheMan.aniNormal;
 		
 		position.set(x, y);
-		acceleration.set(0, -1000);
+		acceleration.set(0, -900);
 		moveSpeed = new Vector2(300, 500);
 		setAnimation(aniNormal);
 		terminalVelocity.set(400, 600);
@@ -27,7 +27,21 @@ public class ScytheMan extends ManipulatableObject {
 		bounds.set(0, 0, width, height);
 		
 	}
-	
+	@Override
+	protected void ensureCorrectCollisionBounds() {
+		bounds.y = position.y;
+		if(viewDirection == VIEW_DIRECTION.left){
+			bounds.width = dimension.x - 20;
+			bounds.x = position.x + 20;
+			
+			
+		}else{
+			bounds.x = position.x + 20;
+			bounds.width = dimension.x - 20;
+			
+		}
+		
+	}
 	@Override
 	public void actOnInputKeyDown(int keycode){
 		
@@ -37,9 +51,10 @@ public class ScytheMan extends ManipulatableObject {
 	
 	@Override
 	public void update(float deltaTime){
-		
+
 		super.update(deltaTime);
 		
+	
 	}
 	
 	@Override
