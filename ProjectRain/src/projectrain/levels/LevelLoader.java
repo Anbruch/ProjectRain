@@ -15,7 +15,12 @@ public class LevelLoader {
 	
 	
 	public enum BLOCK_TYPE{
-		EMPTY(0, 0, 0), PLATFORM(0, 255, 0), PLAYER_SPAWNPOINT(255, 255, 255);
+		EMPTY(0, 0, 0), 
+		PLAYER_SPAWNPOINT(255, 255, 255), 
+		GRASS_PLAT_LONG(0, 255, 0), 
+		GRASS_PLAT_BLOCK_LONG(0,200,0),
+		GRASS_PLAT_SHORT(0,150,0), 
+		GRASS_PLAT_TINY(0,100,0);
 		private int color;
 		private BLOCK_TYPE(int r, int g, int b){
 			
@@ -58,16 +63,35 @@ public class LevelLoader {
 				if(BLOCK_TYPE.EMPTY.sameColor(currentPixel)){
 					//Do nothing
 					
-				//IF PLATFORM
-				}else if(BLOCK_TYPE.PLATFORM.sameColor(currentPixel)){
-					LevelStage.platforms.add(new Platform(pixelX * 356, pixmap.getHeight() - pixelY * 100, 356, 24));
+				//IF GRASS_PLAT_BLOCK_LONG
+				}else if(BLOCK_TYPE.GRASS_PLAT_BLOCK_LONG.sameColor(currentPixel)){
+					LevelStage.platforms.add(new Platform("grass_plat_block_long", pixelX * 1,
+							pixmap.getHeight() - pixelY * 1, 356, 242 ));
+					System.out.println(LevelStage.platforms.size);
+
+				//IF GRASS_PLAT_LONG
+				}else if(BLOCK_TYPE.GRASS_PLAT_LONG.sameColor(currentPixel)){
+					LevelStage.platforms.add(new Platform("grass_plat_long", pixelX * 1,
+							pixmap.getHeight() - pixelY * 1, 356, 24 ));
+					System.out.println(LevelStage.platforms.size);
+
+				//IF GRASS_PLAT_SHORT
+				}else if(BLOCK_TYPE.GRASS_PLAT_SHORT.sameColor(currentPixel)){
+					LevelStage.platforms.add(new Platform("grass_plat_short", pixelX * 1,
+							pixmap.getHeight() - pixelY * 1, 90, 24 ));
+					System.out.println(LevelStage.platforms.size);
+
+				//IF GRASS_PLAT_TINY
+				}else if(BLOCK_TYPE.GRASS_PLAT_TINY.sameColor(currentPixel)){
+					LevelStage.platforms.add(new Platform("grass_plat_tiny", pixelX * 1,
+							pixmap.getHeight() - pixelY * 1, 54, 24 ));
 					System.out.println(LevelStage.platforms.size);
 
 				//IF PLAYER SPAWNPOINT
 				}else if(BLOCK_TYPE.PLAYER_SPAWNPOINT.sameColor(currentPixel)){
 					
 					//Spawn player
-					ScytheMan scytheMan = new ScytheMan(pixelX * 356, pixmap.getHeight() - pixelY * 100, 63, 48);
+					ScytheMan scytheMan = new ScytheMan(pixelX * 1, pixmap.getHeight() - pixelY * 1 , 63, 48);
 					
 					//Track him in these arrays
 					LevelStage.controllableObjects.add(scytheMan);

@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.Disposable;
 
 public class Assets implements Disposable, AssetErrorListener{
@@ -15,6 +16,7 @@ public class Assets implements Disposable, AssetErrorListener{
 	public ScytheMan scytheMan;
 	public Platform platform;
 	public Background nightSky;
+	
 	
 	private Assets(){
 		
@@ -45,9 +47,15 @@ public class Assets implements Disposable, AssetErrorListener{
 		
 	}
 	public class Platform{
-		public final AtlasRegion platform;
+		public final ArrayMap<String, AtlasRegion> platMap; 
+		
 		public Platform(TextureAtlas atlas){
-			platform = atlas.findRegion("platform");
+			platMap = new ArrayMap<String, AtlasRegion>();
+			platMap.put("grass_plat_long", atlas.findRegion("grass_plat_long"));
+			platMap.put("grass_plat_block_long", atlas.findRegion("grass_plat_block_long"));
+			platMap.put("grass_plat_tiny", atlas.findRegion("grass_plat_tiny"));
+			platMap.put("grass_plat_short", atlas.findRegion("grass_plat_short"));
+
 		}
 	}
 	
