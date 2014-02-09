@@ -59,8 +59,6 @@ public class ScytheMan extends ManipulatableObject {
 	
 	@Override
 	public void render(SpriteBatch batch) {
-		image = null;
-		image = animation.getKeyFrame(stateTime, true);
 		super.render(batch);
 	}
 

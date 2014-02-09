@@ -1,0 +1,29 @@
+package projectrain.game_objects.weapons;
+
+import projectrain.game_objects.AbstractGameObject;
+import projectrain.game_objects.classes.ManipulatableObject;
+
+public abstract class Weapon extends AbstractGameObject {
+	
+	public ManipulatableObject owner;
+	public float relOwnerPositionX, relOwnerPositionY;
+	public WEAPON_STATE weaponState;
+	
+	public enum WEAPON_STATE{
+		NORMAL, RUNNING, ability
+	}
+	
+	public Weapon(){
+		
+	}
+	public Weapon(ManipulatableObject owner, float relOwnerPositionX, float relOwnerPositionY){
+		this.owner = owner;
+		weaponState = NORMAL;
+		
+	}
+	
+	@Override
+	public void update(float deltaTime){
+		switch()
+	}
+}

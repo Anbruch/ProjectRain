@@ -1,0 +1,15 @@
+package projectrain.game_objects.abilities;
+
+import projectrain.game_objects.AbstractGameObject;
+import projectrain.game_objects.weapons.Weapon;
+
+public abstract class GenericAbility extends AbstractGameObject{
+	
+	public AbstractGameObject caller;
+	public Weapon weapon;
+	public Array<Rectangle> collisionRects;
+	
+	public GenericAbility(){
+		
+	}
+}

@@ -1,0 +1,10 @@
+package projectrain.game_objects.weapons;
+
+import projectrain.game_objects.AbstractGameObject;
+
+public class Weapon extends AbstractGameObject {
+	
+	public Weapon(){
+		
+	}
+}

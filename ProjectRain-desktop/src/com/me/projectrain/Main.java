@@ -22,8 +22,11 @@ public class Main {
 		cfg.height = 720;
 		cfg.fullscreen = true;
 		
+		
 		new LwjglApplication(new ProjectRain(), cfg);
 	}
 }
+
+
 
 

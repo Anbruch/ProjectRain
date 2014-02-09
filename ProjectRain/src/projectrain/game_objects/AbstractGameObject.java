@@ -20,7 +20,8 @@ public abstract class AbstractGameObject{
 	public Rectangle bounds; // objects bounding box used for collision
 	protected TextureRegion image;
 	public float stateTime;
-
+	
+	public Vector2 currentFrameDimension;
 	public Animation aniRunning;
 	public Animation aniNormal;
 	public float rotation;

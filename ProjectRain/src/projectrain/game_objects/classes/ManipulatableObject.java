@@ -1,6 +1,7 @@
 package projectrain.game_objects.classes;
 
 import projectrain.game_objects.AbstractGameObject;
+import projectrain.game_objects.weapons.Weapon;
 import projectrain.tools.LevelStage;
 
 import com.badlogic.gdx.Input.Keys;
@@ -14,6 +15,7 @@ public class ManipulatableObject extends AbstractGameObject{
 	protected STATE state;
 	private AbstractGameObject target, collidingPlatform;
 	private boolean right, left;
+	public Weapon weapon;
 	
 	public enum VIEW_DIRECTION{
 		left, right
@@ -25,6 +27,7 @@ public class ManipulatableObject extends AbstractGameObject{
 		
 		viewDirection = VIEW_DIRECTION.right;
 		state = STATE.JUMPING;
+		currentFrameDimension = new Vector2();
 		
 	}
 	
@@ -278,8 +281,15 @@ public class ManipulatableObject extends AbstractGameObject{
 	@Override
 	public void render(SpriteBatch batch) {
 		
-		batch.draw(image.getTexture(), position.x, position.y, 0, 0, dimension.x, dimension.y, 1, 1, rotation, image.getRegionX(), image.getRegionY(), image.getRegionWidth(), image.getRegionHeight(),
+		//get correct image and draw the current proportions
+		image = null;
+		image = animation.getKeyFrame(stateTime, true);
+		currentFrameDimension.set(image.getRegionWidth(), image.getRegionHeight());
+		//Draw
+		batch.draw(image.getTexture(), position.x, position.y, 0, 0, currentFrameDimension.x, currentFrameDimension.y, 1, 1, rotation, image.getRegionX(), image.getRegionY(), image.getRegionWidth(), image.getRegionHeight(),
 				viewDirection == VIEW_DIRECTION.left, false);
 
 	}
+
+	
 }

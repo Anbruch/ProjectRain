@@ -1,0 +1,11 @@
+package projectrain.game_objects.abilities;
+
+import projectrain.game_objects.AbstractGameObject;
+
+public abstract class GenericAbility extends AbstractGameObject{
+	
+	public AbstractGameObject caster;
+	public GenericAbility(){
+		
+	}
+}
