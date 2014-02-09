@@ -5,57 +5,64 @@ filter: Nearest,Nearest
 repeat: none
 NightSky
   rotate: false
-  xy: 1, 171
+  xy: 1, 167
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
 stone_platform
   rotate: false
-  xy: 1, 49
+  xy: 1, 45
   size: 500, 120
   orig: 500, 120
   offset: 0, 0
   index: -1
 platform
   rotate: false
-  xy: 1, 35
+  xy: 1, 31
   size: 178, 12
   orig: 178, 12
   offset: 0, 0
   index: -1
 Scythe_running
   rotate: false
-  xy: 1923, 1223
+  xy: 1923, 1219
   size: 47, 28
   orig: 47, 28
   offset: 0, 0
   index: 1
 Scythe_running
   rotate: false
-  xy: 503, 142
+  xy: 503, 138
   size: 48, 27
   orig: 48, 27
   offset: 0, 0
   index: 2
-ScytheMan
-  rotate: false
-  xy: 1, 1
-  size: 42, 32
-  orig: 42, 32
-  offset: 0, 0
-  index: -1
-Scythe_normal
-  rotate: false
-  xy: 1, 1
-  size: 42, 32
-  orig: 42, 32
-  offset: 0, 0
-  index: 0
 Scythe_running
   rotate: false
-  xy: 1923, 1194
+  xy: 1, 1
+  size: 47, 28
+  orig: 47, 28
+  offset: 0, 0
+  index: 3
+Scythe_running
+  rotate: false
+  xy: 1923, 1190
   size: 47, 27
   orig: 47, 27
   offset: 0, 0
   index: 0
+Scythe_normal
+  rotate: false
+  xy: 1972, 1215
+  size: 22, 32
+  orig: 22, 32
+  offset: 0, 0
+  index: 0
+Scythe_standing
+  rotate: false
+  xy: 1972, 1215
+  size: 22, 32
+  orig: 22, 32
+  offset: 0, 0
+  index: -1

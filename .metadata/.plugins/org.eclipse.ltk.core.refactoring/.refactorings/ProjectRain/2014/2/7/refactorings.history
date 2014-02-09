@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename method &apos;projectrain.game_objects.classes.ManipulatableObject.updateWeapon()&apos; to &apos;runWithWeapon&apos;&#x0D;&#x0A;- Original project: &apos;ProjectRain&apos;&#x0D;&#x0A;- Original element: &apos;projectrain.game_objects.classes.ManipulatableObject.updateWeapon()&apos;&#x0D;&#x0A;- Renamed element: &apos;projectrain.game_objects.classes.ManipulatableObject.runWithWeapon()&apos;&#x0D;&#x0A;- Update references to refactored element" delegate="false" deprecate="false" description="Rename method &apos;updateWeapon&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.method" input="/src&lt;projectrain.game_objects.classes{ManipulatableObject.java[ManipulatableObject~updateWeapon" name="runWithWeapon" references="true" stamp="1391905040198" version="1.0"/>
-</session>
