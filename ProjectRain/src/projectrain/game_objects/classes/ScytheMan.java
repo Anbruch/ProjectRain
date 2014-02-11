@@ -24,15 +24,17 @@ public class ScytheMan extends ManipulatableObject {
 		setAnimation(aniNormal);
 		terminalVelocity.set(400, 600);
 		dimension.set(width, height);
-		bounds.set(0, 0, width, height);
+		bounds.set(0, 0, width - 45, height - 21);
 		
 	}
+	
 	@Override
 	protected void ensureCorrectCollisionBounds() {
 		bounds.y = position.y;
+		bounds.x = position.x + 3f;
+		/*
 		if(viewDirection == VIEW_DIRECTION.left){
 			bounds.width = dimension.x - 20;
-			bounds.x = position.x + 20;
 			
 			
 		}else{
@@ -40,7 +42,7 @@ public class ScytheMan extends ManipulatableObject {
 			bounds.width = dimension.x - 20;
 			
 		}
-		
+*/		
 	}
 	@Override
 	public void actOnInputKeyDown(int keycode){

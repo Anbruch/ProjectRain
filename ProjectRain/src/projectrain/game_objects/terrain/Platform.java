@@ -18,6 +18,7 @@ public class Platform extends AbstractGameObject{
 
 		init(x, y, width, height);
 	}
+	
 	public Platform(String platType, float x, float y, float width, float height){
 		image = Assets.instance.platform.platMap.get(platType);
 
@@ -29,7 +30,7 @@ public class Platform extends AbstractGameObject{
 		//set basic vectors of position, dimension and bounds for collision
 		position.set(x, y);
 		dimension.set(width, height);
-		bounds.set(position.x, position.y, dimension.x, dimension.y - 8);
+		bounds.set(position.x, position.y, dimension.x, dimension.y - 3);
 	}
 	
 	@Override

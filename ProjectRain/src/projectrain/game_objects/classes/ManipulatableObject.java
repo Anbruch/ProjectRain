@@ -158,6 +158,18 @@ public class ManipulatableObject extends AbstractGameObject{
 			moveRight();
 		}
 	}
+	private void stopMove() {
+		
+		//Set velocity.x to 0, check if right might be pressed
+		velocity.x = 0;
+		left = false;
+		//Sets animation back to neutral
+		setAnimation(aniNormal);
+		
+		//Bug fix for if both buttons are down,
+		//Left is released, then character should move right
+		
+	}
 
 	private void moveUp() {
 		
@@ -200,6 +212,8 @@ public class ManipulatableObject extends AbstractGameObject{
 			
 				}else{
 					velocity.y = 0;
+					if(collidingPlatform.position.y > position.y + dimension.y)
+						state = STATE.GROUNDED;
 					
 				}
 			}
@@ -215,6 +229,9 @@ public class ManipulatableObject extends AbstractGameObject{
 		//so you run when you land from jump
 		if(animation != aniRunning && state == STATE.GROUNDED && position.x != curPosition.x)
 			setAnimation(aniRunning);
+		else if(state == STATE.GROUNDED && position.x == curPosition.x && animation == aniRunning){
+			setAnimation(aniNormal);
+		}
 	}
 	private boolean move(float deltax, float deltay){
 		//If it's the first call, break into components
@@ -232,6 +249,9 @@ public class ManipulatableObject extends AbstractGameObject{
 			
 				}else{
 					velocity.y = 0;
+					if(collidingPlatform.position.y > position.y + dimension.y)
+						state = STATE.GROUNDED;
+
 				}
 			}
 			return false;

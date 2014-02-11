@@ -16,7 +16,8 @@ public class LevelLoader {
 	
 	public enum BLOCK_TYPE{
 		EMPTY(0, 0, 0), 
-		PLAYER_SPAWNPOINT(255, 255, 255), 
+		PLAYER_SPAWNPOINT(255, 255, 255),
+		ENEMY_SPAWNPOINT(255, 0, 255),
 		GRASS_PLAT_LONG(0, 255, 0), 
 		GRASS_PLAT_BLOCK_LONG(0,200,0),
 		GRASS_PLAT_SHORT(0,150,0), 
@@ -94,10 +95,18 @@ public class LevelLoader {
 					ScytheMan scytheMan = new ScytheMan(pixelX * 1, pixmap.getHeight() - pixelY * 1 , 63, 48);
 					
 					//Track him in these arrays
-					LevelStage.controllableObjects.add(scytheMan);
+					LevelStage.playerControlledObjects.add(scytheMan);
 					InputManager.inputManager.addObject(scytheMan);
 			
+				}else if(BLOCK_TYPE.ENEMY_SPAWNPOINT.sameColor(currentPixel)){
+					
+					//Spawn player
+					
+					//Track him in these arrays
+					LevelStage.enemyControlledObjects.add(new ScytheMan(pixelX * 356, pixmap.getHeight() - pixelY * 100, 63, 48));
+			
 				}
+
 				
 				
 			}
