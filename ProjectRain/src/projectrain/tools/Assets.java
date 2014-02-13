@@ -51,6 +51,9 @@ public class Assets implements Disposable, AssetErrorListener{
 		
 		public Platform(TextureAtlas atlas){
 			platMap = new ArrayMap<String, AtlasRegion>();
+			platMap.put("grass_end", atlas.findRegion("grass_end"));
+			platMap.put("grass_mid", atlas.findRegion("grass_mid"));
+
 			platMap.put("grass_plat_long", atlas.findRegion("grass_plat_long"));
 			platMap.put("grass_plat_block_long", atlas.findRegion("grass_plat_block_long"));
 			platMap.put("grass_plat_tiny", atlas.findRegion("grass_plat_tiny"));

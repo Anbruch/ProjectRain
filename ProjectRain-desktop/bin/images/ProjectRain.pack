@@ -1,88 +1,95 @@
 
-projectrain.png
+ProjectRain2.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 NightSky
   rotate: false
-  xy: 1, 273
+  xy: 1, 294
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
 stone_platform
   rotate: false
-  xy: 1, 151
+  xy: 1, 172
   size: 500, 120
   orig: 500, 120
   offset: 0, 0
   index: -1
 grass_plat_block_long
   rotate: false
-  xy: 1, 30
+  xy: 1, 51
   size: 172, 119
   orig: 172, 119
   offset: 0, 0
   index: -1
 grass_plat_long
   rotate: false
-  xy: 503, 261
+  xy: 503, 282
   size: 172, 10
   orig: 172, 10
   offset: 0, 0
   index: -1
 Scythe_running
   rotate: false
-  xy: 1923, 1325
+  xy: 1923, 1346
   size: 47, 28
   orig: 47, 28
   offset: 0, 0
   index: 1
 Scythe_running
   rotate: false
-  xy: 1, 1
+  xy: 1, 22
   size: 48, 27
   orig: 48, 27
   offset: 0, 0
   index: 2
 Scythe_running
   rotate: false
-  xy: 175, 121
+  xy: 175, 142
   size: 47, 28
   orig: 47, 28
   offset: 0, 0
   index: 3
 Scythe_running
   rotate: false
-  xy: 503, 232
+  xy: 503, 253
   size: 47, 27
   orig: 47, 27
   offset: 0, 0
   index: 0
 Scythe_normal
   rotate: false
-  xy: 1923, 1291
+  xy: 1923, 1312
   size: 22, 32
   orig: 22, 32
   offset: 0, 0
   index: 0
-Scythe_standing
-  rotate: false
-  xy: 1923, 1291
-  size: 22, 32
-  orig: 22, 32
-  offset: 0, 0
-  index: -1
 grass_plat_short
   rotate: false
-  xy: 677, 261
+  xy: 677, 282
   size: 39, 10
   orig: 39, 10
   offset: 0, 0
   index: -1
+grass_end
+  rotate: false
+  xy: 1972, 1355
+  size: 28, 19
+  orig: 28, 19
+  offset: 0, 0
+  index: -1
+grass_mid
+  rotate: false
+  xy: 1, 1
+  size: 20, 19
+  orig: 20, 19
+  offset: 0, 0
+  index: -1
 grass_plat_tiny
   rotate: false
-  xy: 1972, 1343
+  xy: 51, 39
   size: 21, 10
   orig: 21, 10
   offset: 0, 0

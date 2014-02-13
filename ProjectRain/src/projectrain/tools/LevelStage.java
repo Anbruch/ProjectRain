@@ -20,9 +20,7 @@ public class LevelStage {
 	
 	public LevelStage(){
 		levelLoader = new LevelLoader("levels/testLevel.png");
-		for(AbstractGameObject plat: LevelStage.platforms){
-			System.out.println(plat.position);
-		}
+		
 		
 		
 		
