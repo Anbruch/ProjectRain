@@ -18,36 +18,57 @@ public class Platform extends AbstractGameObject{
 	public Platform(float x, float y, int width, int height){
 		image = Assets.instance.platform.platMap.getValueAt((int)(Math.random() * 4));
 
-		init(x, y, width, height);
+		init(null, x, y, width, height);
 	}
 	
 	public Platform(String platType, float x, float y, int width, int height){
 		String endFileName = platType.concat("_end");
 		String midFileName = platType.concat("_mid");
-		//String bodyFileName = platType.concat("_mid");
+		String bodyFileName = platType.concat("_body");
 		
 		endImage = Assets.instance.platform.platMap.get(endFileName);
 		midImage = Assets.instance.platform.platMap.get(midFileName);
-		//bodyImage = Assets.instance.platform.platMap.get(bodyFileName);
+		bodyImage = Assets.instance.platform.platMap.get(bodyFileName);
 
-		init(x, y, width, height);
+		init(platType, x, y, width, height);
 		
 	}
 	
-	private void init(float x, float y, int width, int height){
+	private void init(String platType, float x, float y, int width, int height){
+		String endFileName;
 		endDimension = new Vector2(endImage.getRegionWidth(), endImage.getRegionHeight());
 		midDimension = new Vector2(midImage.getRegionWidth(), midImage.getRegionHeight());
 		
-		lengthX = (int) (Math.ceil((width - 2 * endDimension.x) / midDimension.x));
+		lengthX = (int) (Math.ceil((width - 2 * midDimension.x) / midDimension.x));
+		
 		lengthX = (lengthX > 0) ? lengthX : 0;
-		lengthY = (int) (Math.ceil((height - endDimension.y) / midDimension.y));
-		System.out.println(lengthX);
-		System.out.println("width " + width + "  - 2 * enddimension.x " + (-2 * endDimension.x) + " / midD" + midDimension.x);
+		lengthY = (int) (height / midDimension.y);
+		
+		
+		//Pick between end images of the platform
+		if(lengthY > 1){
+			endFileName = platType.concat("_end2");
+			//endFileName = platType.concat("_end");
+
+		}else{
+			endFileName = platType.concat("_end");
+
+		}
+		
+		String midFileName = platType.concat("_mid");
+		String bodyFileName = platType.concat("_body");
+		
+		endImage = Assets.instance.platform.platMap.get(endFileName);
+		midImage = Assets.instance.platform.platMap.get(midFileName);
+		bodyImage = Assets.instance.platform.platMap.get(bodyFileName);
+		
+		
 		//set basic vectors of position, dimension and bounds for collision
-		position.set(x, y);
+		position.set(x, y - height);
 		dimension.set(width, height);
 		bounds.set(position.x, position.y, endDimension.x * 2 + midDimension.x * lengthX,
-				midDimension.y * lengthY + endDimension.y * lengthY - 3);
+				midDimension.y * lengthY - 5);
+		
 	}
 	
 	/*public void setLength(int lengthX, int lengthY){
@@ -57,35 +78,33 @@ public class Platform extends AbstractGameObject{
 	@Override
 	public void render(SpriteBatch batch) {
 		float relX = 0;
-		batch.draw(endImage.getTexture(), position.x, position.y - endDimension.y, endDimension.x, 
+		batch.draw(endImage.getTexture(), position.x, position.y + lengthY * midDimension.y - midDimension.y, endDimension.x, 
 				endDimension.y, endImage.getRegionX(), endImage.getRegionY(),
 				endImage.getRegionWidth(), endImage.getRegionHeight(), false, false);
 		relX += endDimension.x;
 		for(int i = 0; i < lengthX; i++){
 			batch.draw(midImage.getTexture(), position.x + i * midDimension.x + endDimension.x,
-					position.y - midDimension.y, midDimension.x, 
+					position.y + lengthY * midDimension.y - midDimension.y, midDimension.x, 
 					midDimension.y,  midImage.getRegionX(), midImage.getRegionY(),
 					midImage.getRegionWidth(), midImage.getRegionHeight(), false, false);
 			relX += midDimension.x;
 		}
-		batch.draw(endImage.getTexture(), position.x + relX, position.y - endDimension.y, endDimension.x, 
+		
+		batch.draw(endImage.getTexture(), position.x + relX, position.y + lengthY * midDimension.y - midDimension.y, endDimension.x, 
 				endDimension.y, endImage.getRegionX(), endImage.getRegionY(),
 				endImage.getRegionWidth(), endImage.getRegionHeight(), true, false);
 		
-		/*
-		for(int j = 0; j < lengthY; j++){
-			correctImage = bodyImage;
-			for(int i = 0; i < lengthX; i ++){
+		
+		for(int j = 0; j < lengthY - 1; j++){
+			for(int i = 0; i < lengthX + 2; i ++){
 			
-				batch.draw(endImage.getTexture(), position.x + i * midDimension.x + endDimension.x, position.y, 0, 0, endDimension.x, 
-						endDimension.y, 1, 1, rotation, endImage.getRegionX(), endImage.getRegionY(),
-						endImage.getRegionWidth(), endImage.getRegionHeight(), false, false);
+				batch.draw(bodyImage.getTexture(), position.x + i * midDimension.x, position.y + midDimension.y * j, endDimension.x, 
+						endDimension.y, bodyImage.getRegionX(), bodyImage.getRegionY(),
+						bodyImage.getRegionWidth(), bodyImage.getRegionHeight(), false, false);
 			}
 		}
-		batch.draw(image.getTexture(), position.x, position.y, dimension.x,
-				dimension.y, image.getRegionX(), image.getRegionY(),
-				image.getRegionWidth(), image.getRegionHeight(), false, false);
-		*/
+		
+		
 	}
 
 }

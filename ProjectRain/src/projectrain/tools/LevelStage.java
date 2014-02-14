@@ -28,10 +28,7 @@ public class LevelStage {
 	}
 	public void render(SpriteBatch batch){
 		
-		//render all of the terrain
-		for(AbstractGameObject platform: LevelStage.platforms){
-			platform.render(batch);
-		}
+		
 		
 		//Render all of the manipulatable objects
 		for(ManipulatableObject object: LevelStage.playerControlledObjects){
@@ -41,7 +38,10 @@ public class LevelStage {
 		for(ManipulatableObject object: LevelStage.enemyControlledObjects){
 			object.render(batch);
 		}
-		
+		//render all of the terrain
+		for(AbstractGameObject platform: LevelStage.platforms){
+			platform.render(batch);
+		}
 		
 		
 	}

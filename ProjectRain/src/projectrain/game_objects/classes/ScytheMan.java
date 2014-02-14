@@ -17,6 +17,7 @@ public class ScytheMan extends ManipulatableObject {
 	private void init(float x, float y, float width, float  height){
 		aniRunning = Assets.instance.scytheMan.aniRunning;
 		aniNormal = Assets.instance.scytheMan.aniNormal;
+		aniJumping = Assets.instance.scytheMan.aniJumping;
 		
 		position.set(x, y);
 		acceleration.set(0, -900);

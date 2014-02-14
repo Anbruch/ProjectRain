@@ -83,7 +83,6 @@ public class LevelLoader {
 						Vector2 newPixelXY = extendPlatform(pixelX, pixelY, currentPixel);
 						int lengthX = (int) (newPixelXY.x - pixelX) + 1;
 						int lengthY = (int)(newPixelXY.y - pixelY) + 1;
-						System.out.println(lengthX + " , " + lengthY);
 						
 						LevelStage.platforms.add(new Platform(
 								"grass", pixelX * 1, baseHeight * 1,

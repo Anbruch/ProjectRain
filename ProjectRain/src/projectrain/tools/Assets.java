@@ -53,6 +53,8 @@ public class Assets implements Disposable, AssetErrorListener{
 			platMap = new ArrayMap<String, AtlasRegion>();
 			platMap.put("grass_end", atlas.findRegion("grass_end"));
 			platMap.put("grass_mid", atlas.findRegion("grass_mid"));
+			platMap.put("grass_body", atlas.findRegion("grass_body"));
+			platMap.put("grass_end2", atlas.findRegion("grass_end2"));
 
 			platMap.put("grass_plat_long", atlas.findRegion("grass_plat_long"));
 			platMap.put("grass_plat_block_long", atlas.findRegion("grass_plat_block_long"));
@@ -65,18 +67,21 @@ public class Assets implements Disposable, AssetErrorListener{
 	public class ScytheMan{
 		public final Array<AtlasRegion> scytheNormal;
 		public final Array<AtlasRegion> scytheRunning;
+		public final Array<AtlasRegion >scytheJumping;
 		public final Animation aniRunning;
 		public final Animation aniNormal;
+		public final Animation aniJumping;
 		
 		public ScytheMan(TextureAtlas atlas){
 			
 			scytheRunning = atlas.findRegions("Scythe_running");
+			scytheJumping = atlas.findRegions("Scythe_jumping");
 			scytheNormal = atlas.findRegions("Scythe_normal");
 			scytheNormal.add(atlas.findRegion("Scythe_normal"));
 			
 			aniRunning = new Animation(1 / 10.0f, scytheRunning, Animation.LOOP_PINGPONG);
 			aniNormal = new Animation(1 / 10.0f, scytheNormal, Animation.NORMAL);
-
+			aniJumping = new Animation(1 / 10.0f, scytheJumping, Animation.NORMAL);
 		}
 	}
 	
