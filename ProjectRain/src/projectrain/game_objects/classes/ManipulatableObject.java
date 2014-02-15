@@ -176,11 +176,11 @@ public class ManipulatableObject extends AbstractGameObject {
 		// Set velocity.x to 0, check if right might be pressed
 		velocity.x = 0;
 		left = false;
+		right = false;
 		// Sets animation back to neutral
 		setAnimation(aniNormal);
 
-		// Bug fix for if both buttons are down,
-		// Left is released, then character should move right
+		
 
 	}
 
@@ -204,111 +204,93 @@ public class ManipulatableObject extends AbstractGameObject {
 		this.target = target;
 	}
 
-	@Override
-	public void update(float deltaTime) {
-		super.update(deltaTime);
-
+	public void moveX(float deltaTime){
 		// Used to check if grounded or not
 		Vector2 curPosition = new Vector2(position);
+		
+		//change in X axis this frame
+		float deltaX = velocity.x * deltaTime;
+		
+		//overriden in subclass of ManipulatableObject
+		ensureCorrectCollisionBounds();
 
-		// this frames change in position
-		// Used to check for collision
-		float deltax, deltay;
-		deltax = velocity.x * deltaTime;
-		deltay = velocity.y * deltaTime;
+		// Collision Check this object once for x, once for y
+		if (!collision(deltaX, 0)) {
+			position.x += deltaX;
+		}
 
-		// slightly recursive, one call leads to two separate calls
-		if (deltax == 0) {
-			if (!move(deltax, deltay)) {
-				if (position.y > collidingPlatform.position.y
-						+ collidingPlatform.bounds.height) {
-					state = STATE.GROUNDED;
-					velocity.y = 0;
-					position.y = collidingPlatform.position.y
-							+ collidingPlatform.bounds.height;
-					setAnimation(aniNormal);
-
-				} else {
-					velocity.y = 0;
-					if (collidingPlatform.position.y > position.y + dimension.y)
-						state = STATE.GROUNDED;
-
-				}
-			}
-		} else
-			move(deltax, deltay);
-
-		/*
-		 * //set for collision if(position.y == curPosition.y){ velocity.y = 0;
-		 * state = STATE.GROUNDED;
-		 * 
-		 * }
-		 */
-
+		
 		// so you run when you land from jump
 		if (animation != aniRunning && state == STATE.GROUNDED
 				&& position.x != curPosition.x)
 			setAnimation(aniRunning);
+		
+		//or if you just land, you don't want to be in jumping animation
 		else if (state == STATE.GROUNDED && position.x == curPosition.x
 				&& animation == aniRunning) {
 			setAnimation(aniNormal);
 		}
 	}
-
-	private boolean move(float deltax, float deltay) {
-		// If it's the first call, break into components
-		if (deltax != 0 && deltay != 0) {
-			move(deltax, 0);
-
-			// This same code is also run a few lines up
-			if (move(0, deltay)) {
-				if (state != STATE.JUMPING) {
-					setAnimation(aniJumping);
-				}
-				state = STATE.JUMPING;
-
-				collidingPlatform = null;
-
-			} else {
-				if (position.y > collidingPlatform.position.y
-						+ collidingPlatform.bounds.height) {
-					state = STATE.GROUNDED;
-					setAnimation(aniNormal);
-					velocity.y = 0;
-					position.y = collidingPlatform.position.y
-							+ collidingPlatform.bounds.height;
-
-				} else {
-					velocity.y = 0;
-					/*
-					 * if(collidingPlatform.position.y > position.y +
-					 * dimension.y) state = STATE.GROUNDED;
-					 */
-
-				}
-			}
-			return false;
-
-		}
-
+	public void moveY(float deltaTime){
+		//change in y this frame
+		float deltaY = velocity.y * deltaTime;
+		
+		//overriden by whatever subclass of manipulatable object
 		ensureCorrectCollisionBounds();
 
-		// Collision Check this object once for x, once for y
-		if (!collision(deltax, deltay)) {
-			position.x += deltax;
-			if (deltay != 0) {
-				position.y += deltay;
-				return true;
+		//If you didn't collide in y axis,
+		//add deltaY to the position.y
+		if (!collision(0, deltaY)) {
+			position.y += deltaY;
+			
+		//if you did collide with something,
+		//in the Y AXIS ONLY, set velocity to 0
+		}else{
+			velocity.y = 0;	
+			deltaY = 0;
+		}
+		
+		//If you're in the air, set state to jumping
+		if(deltaY != 0){
+			if (state != STATE.JUMPING) {
+				setAnimation(aniJumping);
+			}
+			
+			state = STATE.JUMPING;
+			collidingPlatform = null;
+			
+		//else you've either hit the top of the top of the platform
+		//or one of the other 3 sides.
+		} else {
+			//If you hit the top of the platform,
+			//set state to grounded and velocity to 0, 
+			//and position to the top of the platform
+			if (position.y > collidingPlatform.position.y
+					+ collidingPlatform.bounds.height) {
+				setAnimation(aniNormal);
+				state = STATE.GROUNDED;
+				velocity.y = 0;
+				position.y = collidingPlatform.position.y
+						+ collidingPlatform.bounds.height;
 			}
 
 		}
+
+	}
+	@Override
+	public void update(float deltaTime) {
+		super.update(deltaTime);
+		moveX(deltaTime);
+		moveY(deltaTime);
+		
 
 		// Just to clarify where the rectangle ended
 		bounds.setPosition(position);
-		return false;
+		
 
 	}
 
+	
 	protected void ensureCorrectCollisionBounds() {
 
 	}
