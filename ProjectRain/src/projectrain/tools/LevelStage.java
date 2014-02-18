@@ -3,7 +3,6 @@ package projectrain.tools;
 import projectrain.game_objects.AbstractGameObject;
 import projectrain.game_objects.classes.ManipulatableObject;
 import projectrain.game_objects.terrain.Platform;
-import projectrain.levels.LevelLoader;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
@@ -14,17 +13,16 @@ public class LevelStage {
 	public static Array<ManipulatableObject> playerControlledObjects = new Array<ManipulatableObject>();
 	public static Array<AbstractGameObject> platforms = new Array<AbstractGameObject>();
 	public static Array<ManipulatableObject> enemyControlledObjects = new Array<ManipulatableObject>();
-	
+	public static ManipulatableObject player;
 	private LevelLoader levelLoader;
 	
 	
 	public LevelStage(){
 		levelLoader = new LevelLoader("levels/testLevel.png");
 		
-		
-		
-		
-		
+	}
+	public static void setPlayer(ManipulatableObject player){
+		LevelStage.player = player;
 	}
 	public void render(SpriteBatch batch){
 		

@@ -1,10 +1,9 @@
-package projectrain.levels;
+package projectrain.tools;
 
 import projectrain.game_objects.AbstractGameObject;
+import projectrain.game_objects.classes.MeleeEnemyAI;
 import projectrain.game_objects.classes.ScytheMan;
 import projectrain.game_objects.terrain.Platform;
-import projectrain.tools.InputManager;
-import projectrain.tools.LevelStage;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -17,7 +16,7 @@ public class LevelLoader {
 
 	public enum BLOCK_TYPE {
 		EMPTY(0, 0, 0), PLAYER_SPAWNPOINT(255, 255, 255), ENEMY_SPAWNPOINT(255,
-				0, 255), GRASS_PLAT_LONG(0, 255, 0), GRASS_PLAT_BLOCK_LONG(0,
+				0, 0), GRASS_PLAT_LONG(0, 255, 0), GRASS_PLAT_BLOCK_LONG(0,
 				200, 0), GRASS_PLAT_SHORT(0, 150, 0), GRASS_PLAT_TINY(0, 100, 0);
 		private int color;
 
@@ -128,16 +127,23 @@ public class LevelLoader {
 
 						// Track him in these arrays
 						LevelStage.playerControlledObjects.add(scytheMan);
+						LevelStage.player = scytheMan;
 						InputManager.inputManager.addObject(scytheMan);
 					}
 				} else if (BLOCK_TYPE.ENEMY_SPAWNPOINT.sameColor(currentPixel)) {
 
 					// Spawn player
 					if (isStartOfNewObject(pixelX, pixelY, currentPixel)) {
-
+						for(int i = 0; i < 500; i++){
+							ScytheMan scytheMan = new ScytheMan(
+									pixelX + i, baseHeight, 63, 48);
+							scytheMan.setMovementSpeed(new Vector2((float)(Math.random()) * 200, 500));
+							MeleeEnemyAI ai = new MeleeEnemyAI(scytheMan, LevelStage.player);
+							scytheMan.addAI(ai);
+						
 						// Track him in these arrays
-						LevelStage.enemyControlledObjects.add(new ScytheMan(
-								pixelX * 356, baseHeight * 100, 63, 48));
+						LevelStage.enemyControlledObjects.add(scytheMan);
+						}
 					}
 				}// end else if
 			}// inner for loop

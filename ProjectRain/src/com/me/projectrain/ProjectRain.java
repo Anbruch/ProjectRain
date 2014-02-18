@@ -5,12 +5,13 @@ import projectrain.tools.InputManager;
 import projectrain.tools.World;
 import projectrain.tools.WorldRenderer;
 
-import com.badlogic.gdx.ApplicationListener;
+
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL10;
 
-public class ProjectRain implements ApplicationListener {
+public class ProjectRain extends Game {
 	boolean paused;//Game being paused handled in main
 	
 	//Variables for the world
@@ -23,7 +24,8 @@ public class ProjectRain implements ApplicationListener {
 		
 		Assets.instance.init(new AssetManager());//Make the Spritesheet to be cut from later
 		InputManager.inputManager.init();
-		World.controller.init();
+		((Game) Gdx.app.getApplicationListener()).setScreen(World.controller);
+
 		WorldRenderer.renderer.init();
 		paused = false;
 	}
@@ -32,23 +34,23 @@ public class ProjectRain implements ApplicationListener {
 	public void dispose() {
 		
 	}
-
+	/*
 	@Override
 	public void render() {		
 		if(!paused){
 			World.controller.update(Gdx.graphics.getDeltaTime());
 		}
-		/*
+		
 		Midnight Blue 2F2F4F
-		Violet 4F2F4F*/
-		Gdx.gl.glClearColor(25, 25, 112, 0); //Default background color
+		Violet 4F2F4F
+		Gdx.gl.glClearColor(255, 255, 255, 0); //Default background color
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
 		WorldRenderer.renderer.render();
 
 		
 	}
-
+	*/
 	@Override
 	public void resize(int width, int height) {
 	}

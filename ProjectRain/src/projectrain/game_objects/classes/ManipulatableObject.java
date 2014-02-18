@@ -16,9 +16,12 @@ public class ManipulatableObject extends AbstractGameObject {
 	protected STATE state;
 	private AbstractGameObject target, collidingPlatform;
 	private boolean right, left;
+	boolean xCollision;
+
 	public Weapon weapon;
 	protected Animation aniJumping;
-
+	private MeleeEnemyAI AI;
+	
 	public enum VIEW_DIRECTION {
 		left, right
 	}
@@ -66,12 +69,17 @@ public class ManipulatableObject extends AbstractGameObject {
 		}
 	}// END OF METHOD
 
-	private void jump() {
+	public void jump() {
 		if (state == STATE.GROUNDED) {
 			velocity.y = moveSpeed.y;
 			state = STATE.JUMPING;
 
 			setAnimation(aniJumping);
+		}
+		
+		//WALL JUMPING, CAN BE REMOVED 
+		if(state == STATE.JUMPING && xCollision){
+			velocity.y = moveSpeed.y;
 		}
 	}
 
@@ -101,7 +109,7 @@ public class ManipulatableObject extends AbstractGameObject {
 		}
 	}// End of actOnInput methods
 
-	private void moveRight() {
+	public void moveRight() {
 
 		right = true;
 		if (left) {
@@ -119,7 +127,7 @@ public class ManipulatableObject extends AbstractGameObject {
 
 	}
 
-	private void moveLeft() {
+	public void moveLeft() {
 		// Set left to true so if we were holding right previous to this,
 		// when we let go of right, it will move us left
 		left = true;
@@ -139,8 +147,11 @@ public class ManipulatableObject extends AbstractGameObject {
 		velocity.x = -moveSpeed.x;
 
 	}
+	public void addAI(MeleeEnemyAI abstractEnemyAI) {
+		this.AI = abstractEnemyAI;
+	}
 
-	private void stopMoveRight() {
+	public void stopMoveRight() {
 
 		// Set velocity to 0, check if left might be pressed
 		velocity.x = 0;
@@ -155,7 +166,7 @@ public class ManipulatableObject extends AbstractGameObject {
 		}
 	}
 
-	private void stopMoveLeft() {
+	public void stopMoveLeft() {
 
 		// Set velocity.x to 0, check if right might be pressed
 		velocity.x = 0;
@@ -171,7 +182,7 @@ public class ManipulatableObject extends AbstractGameObject {
 		}
 	}
 
-	private void stopMove() {
+	public void stopMove() {
 
 		// Set velocity.x to 0, check if right might be pressed
 		velocity.x = 0;
@@ -217,6 +228,9 @@ public class ManipulatableObject extends AbstractGameObject {
 		// Collision Check this object once for x, once for y
 		if (!collision(deltaX, 0)) {
 			position.x += deltaX;
+			xCollision = false;
+		}else{
+			xCollision = true;
 		}
 
 		
@@ -279,6 +293,8 @@ public class ManipulatableObject extends AbstractGameObject {
 	}
 	@Override
 	public void update(float deltaTime) {
+		if(AI != null)
+			AI.update();
 		super.update(deltaTime);
 		moveX(deltaTime);
 		moveY(deltaTime);

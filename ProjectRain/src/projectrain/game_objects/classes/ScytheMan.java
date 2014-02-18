@@ -64,5 +64,9 @@ public class ScytheMan extends ManipulatableObject {
 	public void render(SpriteBatch batch) {
 		super.render(batch);
 	}
+	public void setMovementSpeed(Vector2 moveSpeed) {
+		this.moveSpeed.set(moveSpeed);
+	}
+	
 
 }
