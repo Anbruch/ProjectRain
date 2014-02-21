@@ -115,37 +115,44 @@ grass_plat_short
   orig: 39, 10
   offset: 0, 0
   index: -1
-grass_body
+scythe_walling
   rotate: false
-  xy: 1972, 1398
-  size: 20, 19
-  orig: 20, 19
+  xy: 1972, 1392
+  size: 20, 25
+  orig: 20, 25
   offset: 0, 0
   index: -1
-grass_end
+grass_body
   rotate: false
   xy: 51, 73
   size: 20, 19
   orig: 20, 19
   offset: 0, 0
   index: -1
-grass_end2
+grass_end
   rotate: false
   xy: 224, 194
   size: 20, 19
   orig: 20, 19
   offset: 0, 0
   index: -1
-grass_mid
+grass_end2
   rotate: false
   xy: 552, 304
   size: 20, 19
   orig: 20, 19
   offset: 0, 0
   index: -1
+grass_mid
+  rotate: false
+  xy: 503, 243
+  size: 20, 19
+  orig: 20, 19
+  offset: 0, 0
+  index: -1
 grass_plat_tiny
   rotate: false
-  xy: 503, 252
+  xy: 1923, 1313
   size: 21, 10
   orig: 21, 10
   offset: 0, 0

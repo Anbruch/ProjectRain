@@ -68,20 +68,27 @@ public class Assets implements Disposable, AssetErrorListener{
 		public final Array<AtlasRegion> scytheNormal;
 		public final Array<AtlasRegion> scytheRunning;
 		public final Array<AtlasRegion >scytheJumping;
+		public final Array<AtlasRegion >scytheWalling;
+
 		public final Animation aniRunning;
 		public final Animation aniNormal;
 		public final Animation aniJumping;
+		public final Animation aniWalling;
 		
 		public ScytheMan(TextureAtlas atlas){
 			
 			scytheRunning = atlas.findRegions("Scythe_running");
 			scytheJumping = atlas.findRegions("Scythe_jumping");
+			scytheWalling = atlas.findRegions("scythe_walling");
+			scytheWalling.add(atlas.findRegion("scythe_walling"));
+			
 			scytheNormal = atlas.findRegions("Scythe_normal");
 			scytheNormal.add(atlas.findRegion("Scythe_normal"));
 			
 			aniRunning = new Animation(1 / 10.0f, scytheRunning, Animation.LOOP_PINGPONG);
 			aniNormal = new Animation(1 / 10.0f, scytheNormal, Animation.NORMAL);
 			aniJumping = new Animation(1 / 10.0f, scytheJumping, Animation.NORMAL);
+			aniWalling = new Animation(1/10.0f, scytheWalling, Animation.NORMAL);
 		}
 	}
 	

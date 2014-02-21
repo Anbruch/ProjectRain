@@ -133,7 +133,7 @@ public class LevelLoader {
 				} else if (BLOCK_TYPE.ENEMY_SPAWNPOINT.sameColor(currentPixel)) {
 
 					// Spawn player
-					if (isStartOfNewObject(pixelX, pixelY, currentPixel)) {
+					/*if (isStartOfNewObject(pixelX, pixelY, currentPixel)) {
 						for(int i = 0; i < 500; i++){
 							ScytheMan scytheMan = new ScytheMan(
 									pixelX + i, baseHeight, 63, 48);
@@ -144,7 +144,7 @@ public class LevelLoader {
 						// Track him in these arrays
 						LevelStage.enemyControlledObjects.add(scytheMan);
 						}
-					}
+					}*/
 				}// end else if
 			}// inner for loop
 		}// outer for loop

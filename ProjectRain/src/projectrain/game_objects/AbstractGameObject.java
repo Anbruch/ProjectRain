@@ -26,6 +26,7 @@ public abstract class AbstractGameObject{
 	public Animation aniNormal;
 	public float rotation;
 	public Animation animation;
+	public boolean animationBool;
 	
 	public AbstractGameObject(){
 		position = new Vector2();
@@ -55,7 +56,16 @@ public abstract class AbstractGameObject{
 	public void setAnimation(Animation animation){
 		this.animation = animation;
 		stateTime = 0;
-		
+		if(animation != null){
+			animationBool = true;
+		}else{
+			animationBool = true;
+			
+		}
+	
+	}
+	public void setImage(TextureRegion image){
+		this.image = image;
 	}
 	protected void updateMotionX(float deltaTime){
 		

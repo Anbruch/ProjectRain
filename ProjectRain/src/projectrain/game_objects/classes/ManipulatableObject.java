@@ -14,27 +14,29 @@ public class ManipulatableObject extends AbstractGameObject {
 	protected Vector2 moveSpeed;
 	protected VIEW_DIRECTION viewDirection;
 	protected STATE state;
-	private AbstractGameObject target, collidingPlatform;
+	protected AbstractGameObject target, collidingPlatformX, collidingPlatformY;
+	protected boolean xCollision;
 	private boolean right, left;
-	boolean xCollision;
+	private float deltax, deltay;
 
 	public Weapon weapon;
-	protected Animation aniJumping;
+	protected Animation aniJumping, aniWalling;
 	private MeleeEnemyAI AI;
+	private boolean wallJumped;
 	
 	public enum VIEW_DIRECTION {
 		left, right
 	}
 
 	public enum STATE {
-		JUMPING, GROUNDED
+		JUMPING, GROUNDED, WALLING
 	}
 
 	public ManipulatableObject() {
 
 		viewDirection = VIEW_DIRECTION.right;
 		state = STATE.JUMPING;
-
+		wallJumped = false;
 		currentFrameDimension = new Vector2();
 
 	}
@@ -70,17 +72,22 @@ public class ManipulatableObject extends AbstractGameObject {
 	}// END OF METHOD
 
 	public void jump() {
+		
+		//WALL JUMPING, CAN BE REMOVED 
+		if(state == STATE.WALLING && !wallJumped && collidingPlatformX != null){
+			velocity.y = moveSpeed.y;
+			wallJumped = true;
+		}
+		
+		//Jumping off ground
 		if (state == STATE.GROUNDED) {
 			velocity.y = moveSpeed.y;
 			state = STATE.JUMPING;
-
+			wallJumped = false;
 			setAnimation(aniJumping);
 		}
 		
-		//WALL JUMPING, CAN BE REMOVED 
-		if(state == STATE.JUMPING && xCollision){
-			velocity.y = moveSpeed.y;
-		}
+		
 	}
 
 	public void actOnInputKeyUp(int keycode) {
@@ -220,18 +227,45 @@ public class ManipulatableObject extends AbstractGameObject {
 		Vector2 curPosition = new Vector2(position);
 		
 		//change in X axis this frame
-		float deltaX = velocity.x * deltaTime;
+		deltax = velocity.x * deltaTime;
 		
 		//overriden in subclass of ManipulatableObject
 		ensureCorrectCollisionBounds();
-
+		
+		//If you wall jump and come off the ledge, you can walljump again
+		if(wallJumped && deltax != 0 && collidingPlatformX == null){
+			wallJumped = false;
+		}
+		
 		// Collision Check this object once for x, once for y
-		if (!collision(deltaX, 0)) {
-			position.x += deltaX;
+		if (!collision(deltax, 0)) {
+			position.x += deltax;
+			if(deltax != 0)
+				collidingPlatformX = null;
+			if(deltay != 0){
+				state = STATE.JUMPING;
+				setAnimation(aniJumping);
+			}
 			xCollision = false;
+			
+		//Hit a wall while walking
+		//Everything below hit a wall in the x-axis
+		}else if(deltay == 0){
+			state = STATE.GROUNDED;
+			setAnimation(aniNormal);
+			xCollision = true;
+			
+		//If you're on the wall sliding down
+		}else if(state != STATE.WALLING){
+		
+			state = STATE.WALLING;
+			setAnimation(aniWalling);
+			xCollision = true;
+			
 		}else{
 			xCollision = true;
 		}
+		
 
 		
 		// so you run when you land from jump
@@ -247,31 +281,26 @@ public class ManipulatableObject extends AbstractGameObject {
 	}
 	public void moveY(float deltaTime){
 		//change in y this frame
-		float deltaY = velocity.y * deltaTime;
+		deltay = velocity.y * deltaTime;
 		
 		//overriden by whatever subclass of manipulatable object
 		ensureCorrectCollisionBounds();
 
 		//If you didn't collide in y axis,
 		//add deltaY to the position.y
-		if (!collision(0, deltaY)) {
-			position.y += deltaY;
+		if (!collision(0, deltay)) {
+			position.y += deltay;
 			
 		//if you did collide with something,
 		//in the Y AXIS ONLY, set velocity to 0
 		}else{
 			velocity.y = 0;	
-			deltaY = 0;
+			deltay = 0;
 		}
 		
 		//If you're in the air, set state to jumping
-		if(deltaY != 0){
-			if (state != STATE.JUMPING) {
-				setAnimation(aniJumping);
-			}
-			
-			state = STATE.JUMPING;
-			collidingPlatform = null;
+		if(deltay != 0){
+			collidingPlatformY = null;
 			
 		//else you've either hit the top of the top of the platform
 		//or one of the other 3 sides.
@@ -279,13 +308,13 @@ public class ManipulatableObject extends AbstractGameObject {
 			//If you hit the top of the platform,
 			//set state to grounded and velocity to 0, 
 			//and position to the top of the platform
-			if (position.y > collidingPlatform.position.y
-					+ collidingPlatform.bounds.height) {
+			if (position.y > collidingPlatformY.position.y
+					+ collidingPlatformY.bounds.height) {
 				setAnimation(aniNormal);
 				state = STATE.GROUNDED;
 				velocity.y = 0;
-				position.y = collidingPlatform.position.y
-						+ collidingPlatform.bounds.height;
+				position.y = collidingPlatformY.position.y
+						+ collidingPlatformY.bounds.height;
 			}
 
 		}
@@ -311,19 +340,25 @@ public class ManipulatableObject extends AbstractGameObject {
 
 	}
 
-	private boolean collision(float deltax, float deltay) {
+	private boolean collision(float deltaX, float deltaY) {
 
 		// Set bounds to where this object will be after adding
 		// the velocity of this frame to check and see if we are
 		// going to collide with anything
-		bounds.setPosition(bounds.x + deltax, position.y + deltay);
+		bounds.setPosition(position.x + deltaX, position.y + deltaY);
 
 		// Iterate through platforms
 		for (AbstractGameObject platform : LevelStage.platforms) {
 
 			// If collision
 			if (bounds.overlaps(platform.bounds)) {
-				collidingPlatform = platform;
+				if(deltaX != 0){
+					collidingPlatformX = platform;
+					deltax = 0;
+				}
+				if(deltaY != 0)
+					collidingPlatformY = platform;
+				
 				return true;
 			}
 		}
