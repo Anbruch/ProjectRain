@@ -1,0 +1,689 @@
+
+ProjectRain2.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+scroll
+  rotate: false
+  xy: 1, 623
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: 1
+scroll
+  rotate: false
+  xy: 1, 221
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: 2
+scroll
+  rotate: false
+  xy: 403, 623
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: 3
+scroll
+  rotate: false
+  xy: 403, 221
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: 4
+mPad
+  rotate: false
+  xy: 1, 4
+  size: 215, 215
+  orig: 215, 215
+  offset: 0, 0
+  index: -1
+button.down
+  rotate: false
+  xy: 218, 125
+  size: 246, 94
+  orig: 246, 94
+  offset: 0, 0
+  index: -1
+button.up
+  rotate: false
+  xy: 218, 29
+  size: 246, 94
+  orig: 246, 94
+  offset: 0, 0
+  index: -1
+deathPortal
+  rotate: false
+  xy: 805, 898
+  size: 125, 125
+  orig: 125, 125
+  offset: 0, 0
+  index: 1
+deathPortal
+  rotate: false
+  xy: 466, 94
+  size: 125, 125
+  orig: 125, 125
+  offset: 0, 0
+  index: 2
+deathPortal
+  rotate: false
+  xy: 805, 771
+  size: 125, 125
+  orig: 125, 125
+  offset: 0, 0
+  index: 3
+portal
+  rotate: false
+  xy: 593, 94
+  size: 125, 125
+  orig: 125, 125
+  offset: 0, 0
+  index: 1
+portal
+  rotate: false
+  xy: 805, 644
+  size: 125, 125
+  orig: 125, 125
+  offset: 0, 0
+  index: 2
+portal
+  rotate: false
+  xy: 805, 517
+  size: 125, 125
+  orig: 125, 125
+  offset: 0, 0
+  index: 3
+riftFrag
+  rotate: false
+  xy: 805, 411
+  size: 135, 104
+  orig: 135, 104
+  offset: 0, 0
+  index: 0
+riftFrag
+  rotate: false
+  xy: 805, 305
+  size: 135, 104
+  orig: 135, 104
+  offset: 0, 0
+  index: 1
+homeButton_down
+  rotate: false
+  xy: 466, 29
+  size: 164, 63
+  orig: 164, 63
+  offset: 0, 0
+  index: -1
+riftFrag
+  rotate: false
+  xy: 805, 199
+  size: 135, 104
+  orig: 135, 104
+  offset: 0, 0
+  index: 10
+mDown_down
+  rotate: false
+  xy: 932, 938
+  size: 85, 85
+  orig: 85, 85
+  offset: 0, 0
+  index: -1
+mDown_up
+  rotate: false
+  xy: 932, 851
+  size: 85, 85
+  orig: 85, 85
+  offset: 0, 0
+  index: -1
+mLeft_down
+  rotate: false
+  xy: 932, 764
+  size: 85, 85
+  orig: 85, 85
+  offset: 0, 0
+  index: -1
+mLeft_up
+  rotate: false
+  xy: 932, 677
+  size: 85, 85
+  orig: 85, 85
+  offset: 0, 0
+  index: -1
+mRight_down
+  rotate: false
+  xy: 932, 590
+  size: 85, 85
+  orig: 85, 85
+  offset: 0, 0
+  index: -1
+riftFrag
+  rotate: false
+  xy: 720, 93
+  size: 135, 104
+  orig: 135, 104
+  offset: 0, 0
+  index: 11
+riftFrag
+  rotate: false
+  xy: 857, 93
+  size: 135, 104
+  orig: 135, 104
+  offset: 0, 0
+  index: 12
+MagnifyingGlass
+  rotate: false
+  xy: 932, 517
+  size: 70, 71
+  orig: 70, 71
+  offset: 0, 0
+  index: -1
+mRight_up
+  rotate: false
+  xy: 632, 7
+  size: 85, 85
+  orig: 85, 85
+  offset: 0, 0
+  index: -1
+homeButton_up
+  rotate: false
+  xy: 719, 28
+  size: 164, 63
+  orig: 164, 63
+  offset: 0, 0
+  index: -1
+zoomIn_down
+  rotate: false
+  xy: 885, 26
+  size: 121, 65
+  orig: 121, 65
+  offset: 0, 0
+  index: -1
+PauseButton
+  rotate: false
+  xy: 942, 469
+  size: 41, 46
+  orig: 41, 46
+  offset: 0, 0
+  index: -1
+restartLevelButton
+  rotate: false
+  xy: 985, 478
+  size: 38, 37
+  orig: 38, 37
+  offset: 0, 0
+  index: -1
+PlayButton
+  rotate: false
+  xy: 942, 421
+  size: 41, 46
+  orig: 41, 46
+  offset: 0, 0
+  index: -1
+Scythe_running
+  rotate: false
+  xy: 942, 391
+  size: 47, 28
+  orig: 47, 28
+  offset: 0, 0
+  index: 1
+Scythe_running
+  rotate: false
+  xy: 942, 361
+  size: 47, 28
+  orig: 47, 28
+  offset: 0, 0
+  index: 3
+Scythe_running
+  rotate: false
+  xy: 942, 332
+  size: 47, 27
+  orig: 47, 27
+  offset: 0, 0
+  index: 0
+Scythe_running
+  rotate: false
+  xy: 942, 303
+  size: 48, 27
+  orig: 48, 27
+  offset: 0, 0
+  index: 2
+rogue_jumping
+  rotate: false
+  xy: 942, 273
+  size: 39, 28
+  orig: 39, 28
+  offset: 0, 0
+  index: 1
+rogue_jumping
+  rotate: false
+  xy: 942, 243
+  size: 39, 28
+  orig: 39, 28
+  offset: 0, 0
+  index: 2
+rogue_jumping
+  rotate: false
+  xy: 942, 213
+  size: 39, 28
+  orig: 39, 28
+  offset: 0, 0
+  index: 3
+Scythe_jumping
+  rotate: false
+  xy: 985, 446
+  size: 37, 30
+  orig: 37, 30
+  offset: 0, 0
+  index: 4
+rogue_running
+  rotate: false
+  xy: 991, 415
+  size: 32, 29
+  orig: 32, 29
+  offset: 0, 0
+  index: 6
+rogue_running
+  rotate: false
+  xy: 991, 383
+  size: 31, 30
+  orig: 31, 30
+  offset: 0, 0
+  index: 2
+Scythe_jumping
+  rotate: false
+  xy: 991, 351
+  size: 31, 30
+  orig: 31, 30
+  offset: 0, 0
+  index: 2
+Scythe_jumping
+  rotate: false
+  xy: 992, 319
+  size: 31, 30
+  orig: 31, 30
+  offset: 0, 0
+  index: 5
+rogue_running
+  rotate: false
+  xy: 992, 288
+  size: 31, 29
+  orig: 31, 29
+  offset: 0, 0
+  index: 3
+scythe_walling
+  rotate: false
+  xy: 719, 1
+  size: 20, 25
+  orig: 20, 25
+  offset: 0, 0
+  index: -1
+Scythe_jumping
+  rotate: false
+  xy: 994, 256
+  size: 29, 30
+  orig: 29, 30
+  offset: 0, 0
+  index: 0
+Scythe_jumping
+  rotate: false
+  xy: 994, 224
+  size: 29, 30
+  orig: 29, 30
+  offset: 0, 0
+  index: 1
+landDust
+  rotate: false
+  xy: 720, 206
+  size: 44, 13
+  orig: 44, 13
+  offset: 0, 0
+  index: 0
+landDust
+  rotate: false
+  xy: 218, 14
+  size: 44, 13
+  orig: 44, 13
+  offset: 0, 0
+  index: 1
+landDust
+  rotate: false
+  xy: 741, 13
+  size: 44, 13
+  orig: 44, 13
+  offset: 0, 0
+  index: 2
+landDust
+  rotate: false
+  xy: 264, 14
+  size: 44, 13
+  orig: 44, 13
+  offset: 0, 0
+  index: 3
+landDust
+  rotate: false
+  xy: 787, 13
+  size: 44, 13
+  orig: 44, 13
+  offset: 0, 0
+  index: 4
+fireball
+  rotate: false
+  xy: 1004, 572
+  size: 19, 16
+  orig: 19, 16
+  offset: 0, 0
+  index: 0
+fireball
+  rotate: false
+  xy: 1004, 554
+  size: 19, 16
+  orig: 19, 16
+  offset: 0, 0
+  index: 1
+rogue_walling
+  rotate: false
+  xy: 1008, 190
+  size: 15, 32
+  orig: 15, 32
+  offset: 0, 0
+  index: -1
+rogue_normal
+  rotate: false
+  xy: 1004, 519
+  size: 13, 33
+  orig: 13, 33
+  offset: 0, 0
+  index: 0
+wallJump
+  rotate: false
+  xy: 983, 266
+  size: 9, 20
+  orig: 9, 20
+  offset: 0, 0
+  index: 0
+wallJump
+  rotate: false
+  xy: 983, 244
+  size: 9, 20
+  orig: 9, 20
+  offset: 0, 0
+  index: 1
+wallJump
+  rotate: false
+  xy: 983, 222
+  size: 9, 20
+  orig: 9, 20
+  offset: 0, 0
+  index: 3
+Scythe_normal
+  rotate: false
+  xy: 994, 156
+  size: 22, 32
+  orig: 22, 32
+  offset: 0, 0
+  index: 0
+rogue_landing
+  rotate: false
+  xy: 994, 130
+  size: 22, 24
+  orig: 22, 24
+  offset: 0, 0
+  index: 0
+spikeTrap
+  rotate: false
+  xy: 994, 109
+  size: 20, 19
+  orig: 20, 19
+  offset: 0, 0
+  index: -1
+wallJump
+  rotate: false
+  xy: 766, 199
+  size: 9, 20
+  orig: 9, 20
+  offset: 0, 0
+  index: 4
+walljump
+  rotate: false
+  xy: 777, 199
+  size: 9, 20
+  orig: 9, 20
+  offset: 0, 0
+  index: 5
+pauseLayer
+  rotate: false
+  xy: 741, 2
+  size: 16, 9
+  orig: 16, 9
+  offset: 0, 0
+  index: -1
+snow
+  rotate: false
+  xy: 985, 440
+  size: 3, 4
+  orig: 3, 4
+  offset: 0, 0
+  index: 0
+
+ProjectRain22.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+scroll
+  rotate: false
+  xy: 1, 623
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: 5
+scroll
+  rotate: false
+  xy: 1, 221
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: 6
+scroll
+  rotate: false
+  xy: 403, 623
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: 7
+scroll
+  rotate: false
+  xy: 403, 221
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: 8
+riftFrag
+  rotate: false
+  xy: 1, 115
+  size: 135, 104
+  orig: 135, 104
+  offset: 0, 0
+  index: 13
+riftFrag
+  rotate: false
+  xy: 805, 919
+  size: 135, 104
+  orig: 135, 104
+  offset: 0, 0
+  index: 2
+riftFrag
+  rotate: false
+  xy: 1, 9
+  size: 135, 104
+  orig: 135, 104
+  offset: 0, 0
+  index: 3
+riftFrag
+  rotate: false
+  xy: 138, 115
+  size: 135, 104
+  orig: 135, 104
+  offset: 0, 0
+  index: 4
+riftFrag
+  rotate: false
+  xy: 805, 813
+  size: 135, 104
+  orig: 135, 104
+  offset: 0, 0
+  index: 5
+riftFrag
+  rotate: false
+  xy: 138, 9
+  size: 135, 104
+  orig: 135, 104
+  offset: 0, 0
+  index: 6
+riftFrag
+  rotate: false
+  xy: 275, 115
+  size: 135, 104
+  orig: 135, 104
+  offset: 0, 0
+  index: 7
+riftFrag
+  rotate: false
+  xy: 805, 707
+  size: 135, 104
+  orig: 135, 104
+  offset: 0, 0
+  index: 8
+riftFrag
+  rotate: false
+  xy: 275, 9
+  size: 135, 104
+  orig: 135, 104
+  offset: 0, 0
+  index: 9
+menuButton_down
+  rotate: false
+  xy: 412, 156
+  size: 164, 63
+  orig: 164, 63
+  offset: 0, 0
+  index: -1
+menuButton_up
+  rotate: false
+  xy: 412, 91
+  size: 164, 63
+  orig: 164, 63
+  offset: 0, 0
+  index: -1
+nextlevelbutton_down
+  rotate: false
+  xy: 578, 160
+  size: 149, 59
+  orig: 149, 59
+  offset: 0, 0
+  index: -1
+nextlevelbutton_up
+  rotate: false
+  xy: 412, 30
+  size: 149, 59
+  orig: 149, 59
+  offset: 0, 0
+  index: -1
+zoomIn_up
+  rotate: false
+  xy: 805, 640
+  size: 121, 65
+  orig: 121, 65
+  offset: 0, 0
+  index: -1
+zoomOut_down
+  rotate: false
+  xy: 578, 93
+  size: 121, 65
+  orig: 121, 65
+  offset: 0, 0
+  index: -1
+zoomOut_up
+  rotate: false
+  xy: 805, 573
+  size: 121, 65
+  orig: 121, 65
+  offset: 0, 0
+  index: -1
+mUp_down
+  rotate: false
+  xy: 805, 486
+  size: 85, 85
+  orig: 85, 85
+  offset: 0, 0
+  index: -1
+mUp_up
+  rotate: false
+  xy: 805, 399
+  size: 85, 85
+  orig: 85, 85
+  offset: 0, 0
+  index: -1
+rogue_running
+  rotate: false
+  xy: 412, 1
+  size: 30, 27
+  orig: 30, 27
+  offset: 0, 0
+  index: 4
+rogue_jumping
+  rotate: false
+  xy: 942, 995
+  size: 39, 28
+  orig: 39, 28
+  offset: 0, 0
+  index: 4
+rogue_jumping
+  rotate: false
+  xy: 729, 191
+  size: 39, 28
+  orig: 39, 28
+  offset: 0, 0
+  index: 5
+rogue_jumping
+  rotate: false
+  xy: 805, 369
+  size: 39, 28
+  orig: 39, 28
+  offset: 0, 0
+  index: 6
+rogue_jumping
+  rotate: false
+  xy: 942, 965
+  size: 39, 28
+  orig: 39, 28
+  offset: 0, 0
+  index: 7
+rogue_jumping
+  rotate: false
+  xy: 983, 995
+  size: 39, 28
+  orig: 39, 28
+  offset: 0, 0
+  index: 8
+Scythe_jumping
+  rotate: false
+  xy: 892, 541
+  size: 33, 30
+  orig: 33, 30
+  offset: 0, 0
+  index: 3
+rogue_running
+  rotate: false
+  xy: 729, 161
+  size: 31, 28
+  orig: 31, 28
+  offset: 0, 0
+  index: 1
+rogue_running
+  rotate: false
+  xy: 805, 338
+  size: 30, 29
+  orig: 30, 29
+  offset: 0, 0
+  index: 5

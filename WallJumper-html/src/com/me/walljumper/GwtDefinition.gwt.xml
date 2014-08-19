@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<module>
+    <source path="walljumper"/>
+    <entry-point class="com.me.walljumper.client.GwtLauncher"/>
+    <set-configuration-property name="gdx.assetpath" value="../WallJumper-android/assets"/>
+    <inherits name="WallJumper"/>
+    <inherits name="aurelienribon.tweenengine"/>
+    <inherits name="com.badlogic.gdx.backends.gdx_backends_gwt"/>
+</module>
