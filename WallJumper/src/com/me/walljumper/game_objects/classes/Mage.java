@@ -51,39 +51,24 @@ public class Mage extends ManipulatableObject {
 		dimension.set(width * scale, height * scale);
 		bounds.set(position.x, position.y, dimension.x, dimension.y - .2f);
 	}
+	
+	//FireBall
 	@Override
-	public void ability1() {
+	public void abilityUp1() {
 
 		DIRECTION dir = DIRECTION.getDirection(this, up, down, right, left);
 		World.controller.activeAbilities.add(new Fireball(this, dir));
-	}
-	@Override
-	public void jump() {
+		combatState = COMBAT.NEUTRAL;
+		checkCombatState();
 
 	}
 	@Override
-	public void actOnInputKeyDown(int keycode) {
-		
-		if(Keys.SPACE == keycode){
-			teleportAiming = true;
-			teleport = new Teleport(this);		
-			teleport.setEndTime(2);
-			World.controller.activeAbilities.add(teleport);
-			return;
-		}
-		
-		if(teleportAiming){
-			teleport.actOnInputKeyDown(keycode);
-			return;
-		}
-		super.actOnInputKeyDown(keycode);
-
+	public void abilityDown1() {
+		combatState = COMBAT.CASTING;
+		checkCombatState();
 	}
-	@Override
-	public void finishTeleport() {
-		teleportAiming = false;
-		teleport.destroy();
-	}
+	
+	
 	@Override
 	protected void ensureCorrectCollisionBounds() {
 		
@@ -92,24 +77,7 @@ public class Mage extends ManipulatableObject {
 		
 	
 	}
-	@Override
-	public void actOnInputKeyUp(int keycode) {
-		super.actOnInputKeyUp(keycode);
-		
-		if(teleportAiming){
-			
-			teleport.actOnInputKeyUp(keycode);
-		}
-		
-		
-	}
-	@Override
-	public void update(float deltaTime) {
-		if(teleportAiming)
-			return;
-		super.update(deltaTime);
-	}
-	
+
 	
 	@Override
 	public void render(SpriteBatch batch) {

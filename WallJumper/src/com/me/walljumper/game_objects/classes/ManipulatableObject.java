@@ -21,7 +21,7 @@ public class ManipulatableObject extends AbstractGameObject {
 	protected AbstractGameObject target, collidingPlatformX;
 	public AbstractGameObject collidingPlatformY;
 	protected boolean xCollision;
-	
+
 	private float deltax, deltay, rotSpeed;
 	public float moveToSomethingOverTime;
 	protected Animation zAttack;
@@ -43,7 +43,7 @@ public class ManipulatableObject extends AbstractGameObject {
 	}
 
 	public enum COMBAT {
-		ATTACKING, DEFENDING, NEUTRAL;
+		CASTING, DEFENDING, NEUTRAL;
 	}
 
 	public ManipulatableObject() {
@@ -56,16 +56,19 @@ public class ManipulatableObject extends AbstractGameObject {
 		bhOriginPos = new Vector2();
 
 		wallJumped = false;
-		
+
 		currentFrameDimension = new Vector2();
 	}
+
 	public void actOnInputKeyDown(int keycode) {
 		// Movement, same among all characters
 		if (World.controller.blackHoled) {
 			return;
 		}
+
 		// Movement, same among all characters
 		switch (keycode) {
+
 		// LEFT
 		case Keys.LEFT:
 
@@ -86,86 +89,29 @@ public class ManipulatableObject extends AbstractGameObject {
 
 			moveUp();
 			break;
-		
-		//ABILITIES
-		//A BUTTON
+		// ABILITIES
+		// A BUTTON
 		case Keys.A:
-			ability1();
+			abilityDown1();
 			break;
 		case Keys.S:
-			ability2();
+			abilityDown2();
 			break;
 		case Keys.D:
-			ability3();
+			abilityDown3();
 			break;
 		case Keys.F:
-			ability4();
+			abilityDown4();
 			break;
+
 		case Keys.SPACE:
 
 			jump();
 			break;
 		}
+		
+		
 	}// END OF METHOD
-
-	public void ability4() {
-		
-	}
-
-	public void ability3() {
-		
-	}
-
-	public void ability1() {
-		
-	}
-
-	public void ability2() {
-		
-	}
-
-	public void jump() {
-
-		// WALL JUMPING, CAN BE REMOVED
-		if (state == STATE.WALLING && !wallJumped && collidingPlatformX != null) {
-			velocity.y = moveSpeed.y;
-			if(viewDirection == VIEW_DIRECTION.left){
-				velocity.x = moveSpeed.x;
-			}else{
-				velocity.x = -moveSpeed.x;
-			}
-			switchViewDirection();
-			wallJumped = true;
-		}
-
-		// Jumping off ground
-		if (state == STATE.GROUNDED) {
-			velocity.y = moveSpeed.y;
-			state = STATE.JUMPING;
-			wallJumped = false;
-			setAnimation(aniJumping);
-		}
-
-	}
-	//Switches the state of the view direction variable and 
-	//fixes bug where you teleport to other side of the platform because
-	//of the method positionOnSidePlatform()
-	private void switchViewDirection() {
-		viewDirection = viewDirection == VIEW_DIRECTION.left ? VIEW_DIRECTION.right : VIEW_DIRECTION.left;
-		right = false; left = false;
-		
-	}
-
-	// Called when you hit a platform in the x-axis
-	public void positionOnSidePlatform() {
-		if (left) {
-			position.x = collidingPlatformX.position.x
-					+ collidingPlatformX.bounds.width;
-		} else if (right) {
-			position.x = collidingPlatformX.position.x - bounds.width;
-		}
-	}
-
 	public void actOnInputKeyUp(int keycode) {
 		// Movement, same among all characters
 		switch (keycode) {
@@ -189,8 +135,91 @@ public class ManipulatableObject extends AbstractGameObject {
 
 			stopMoveUp();
 			break;
+
+		case Keys.A:
+			abilityUp1();
+			
 		}
+		
+		
+		
+
 	}// End of actOnInput methods
+
+
+	public void jump() {
+
+		// WALL JUMPING, CAN BE REMOVED
+		if (state == STATE.WALLING && !wallJumped && collidingPlatformX != null) {
+			velocity.y = moveSpeed.y;
+			if (viewDirection == VIEW_DIRECTION.left) {
+				velocity.x = moveSpeed.x;
+			} else {
+				velocity.x = -moveSpeed.x;
+			}
+			switchViewDirection();
+			wallJumped = true;
+		}
+
+		// Jumping off ground
+		if (state == STATE.GROUNDED) {
+			velocity.y = moveSpeed.y;
+			state = STATE.JUMPING;
+			wallJumped = false;
+			setAnimation(aniJumping);
+		}
+	}
+
+	// Switches the state of the view direction variable and
+	// fixes bug where you teleport to other side of the platform because
+	// of the method positionOnSidePlatform()
+	private void switchViewDirection() {
+		viewDirection = viewDirection == VIEW_DIRECTION.left ? VIEW_DIRECTION.right
+				: VIEW_DIRECTION.left;
+		right = false;
+		left = false;
+
+	}
+
+	// Called when you hit a platform in the x-axis
+	public void positionOnSidePlatform() {
+		if (left) {
+			position.x = collidingPlatformX.position.x
+					+ collidingPlatformX.bounds.width;
+		} else if (right) {
+			position.x = collidingPlatformX.position.x - bounds.width;
+		}
+	}
+
+	
+	
+
+	
+
+
+	public void abilityDown1() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void abilityDown2() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void abilityDown3() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void abilityDown4() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public void abilityUp1() {
+
+	}
 
 	public void moveRight() {
 
@@ -201,17 +230,21 @@ public class ManipulatableObject extends AbstractGameObject {
 			velocity.x = 0;
 			return;
 		}
+		viewDirection = VIEW_DIRECTION.right;
+
+		if(combatState == COMBAT.CASTING)
+			return;
 		// Animates the run if grounded
 		if (state == STATE.GROUNDED) {
 			setAnimation(aniRunning);
 		}
-		viewDirection = VIEW_DIRECTION.right;
+		
 		velocity.x = moveSpeed.x;
 
 	}
 
 	public void moveLeft() {
-		
+
 		// Set left to true so if we were holding right previous to this,
 		// when we let go of right, it will move us left
 		left = true;
@@ -219,15 +252,22 @@ public class ManipulatableObject extends AbstractGameObject {
 			velocity.x = 0;
 			if (state != STATE.JUMPING)
 				setAnimation(aniNormal);
-			
+
 			return;
 		}
+		viewDirection = VIEW_DIRECTION.left;
+
+		if(combatState == COMBAT.CASTING){
+			return;
+		}
+
 
 		// Sets up running animation if on ground
 		if (state == STATE.GROUNDED) {
 			setAnimation(aniRunning);
 		}
-		viewDirection = VIEW_DIRECTION.left;
+
+
 		velocity.x = -moveSpeed.x;
 
 	}
@@ -238,12 +278,12 @@ public class ManipulatableObject extends AbstractGameObject {
 
 	public void stopMoveRight() {
 
-			// Set velocity to 0, check if left might be pressed
-			right = false;
-			if (state != STATE.WALLING) {
+		// Set velocity to 0, check if left might be pressed
+		right = false;
+		if (state != STATE.WALLING) {
 
 			// Animates back to neutral
-			if (state != STATE.JUMPING ) {
+			if (state != STATE.JUMPING) {
 				setAnimation(aniNormal);
 				velocity.x = 0;
 
@@ -282,7 +322,7 @@ public class ManipulatableObject extends AbstractGameObject {
 		// Sets animation back to neutral
 		setAnimation(aniNormal);
 
-	}
+	} 
 
 	private void moveUp() {
 		up = true;
@@ -387,7 +427,7 @@ public class ManipulatableObject extends AbstractGameObject {
 			// in the Y AXIS ONLY, set velocity to 0
 		} else {
 			velocity.y = 0;
-			if (position.y > collidingPlatformY.position.y){
+			if (position.y > collidingPlatformY.position.y) {
 				deltay = 0;
 			}
 		}
@@ -407,7 +447,7 @@ public class ManipulatableObject extends AbstractGameObject {
 							+ collidingPlatformY.bounds.height) {
 				if ((left || right) && xCollision == false)
 					setAnimation(aniRunning);
-				else{
+				else {
 					setAnimation(aniNormal);
 					velocity.x = 0;
 				}
@@ -432,13 +472,11 @@ public class ManipulatableObject extends AbstractGameObject {
 
 	@Override
 	public void update(float deltaTime) {
-		
-	
-		
+
 		if (World.controller.blackHoled) {
 			return;
 		}
-		
+
 		super.update(deltaTime);
 		moveX(deltaTime);
 		moveY(deltaTime);
@@ -471,17 +509,14 @@ public class ManipulatableObject extends AbstractGameObject {
 	// Sets it's animation back to what it should be after an attack
 	// animation is finished
 	protected void checkCombatState() {
-		if (combatState == COMBAT.ATTACKING || combatState == COMBAT.DEFENDING) {
+		ensureMoving();
+		if (combatState == COMBAT.CASTING || combatState == COMBAT.DEFENDING) {
 			velocity.x = 0;
 
 			// if MO attack animation is finished
 
-			if (animation.isAnimationFinished(stateTime)) {
-				combatState = COMBAT.NEUTRAL;
-				ensureMoving();
-			}
-
 		}
+		
 	}
 
 	private void ensureMoving() {
@@ -555,7 +590,6 @@ public class ManipulatableObject extends AbstractGameObject {
 
 	@Override
 	public void render(SpriteBatch batch) {
-		
 
 		// get correct image and draw the current proportions
 		image = null;
@@ -595,9 +629,8 @@ public class ManipulatableObject extends AbstractGameObject {
 
 	}// End method
 
-	
 	public void finishTeleport() {
-		
+
 	}
 
 }
