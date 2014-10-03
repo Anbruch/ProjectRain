@@ -44,7 +44,6 @@ public class Ability extends AbstractGameObject {
 		currentFrameDimension.set(image.getRegionWidth() / 10f,
 				image.getRegionHeight() / 10f);
 		// Draw
-		if(onScreen)
 		batch.draw(image, position.x, position.y, origin.x, origin.y,
 				dimension.x, dimension.y, 1, 1,
 				rotation);

@@ -10,6 +10,7 @@ import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.math.Interpolation;
@@ -269,6 +270,11 @@ public class MainMenu extends AbstractScreen{
 		.end()
 
 		.setCallback(myCallBack).setCallbackTriggers(TweenCallback.COMPLETE).start(twnManager);
+		
+	}
+	@Override
+	public void controllerButtonDown(int controllerNumber, int buttonIndex) {
+		// TODO Auto-generated method stub
 		
 	}
 

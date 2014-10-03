@@ -3,6 +3,7 @@ package com.me.walljumper.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.utils.Array;
@@ -65,6 +66,12 @@ public class StoryScreen extends AbstractScreen {
 	@Override
 	public InputProcessor getInputProcessor() {
 		return stage;
+	}
+
+	@Override
+	public void controllerButtonDown(int controllerNumber, int buttonIndex) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

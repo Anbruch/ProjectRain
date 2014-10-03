@@ -1,6 +1,7 @@
 package com.me.walljumper.tools;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.math.Vector2;
 import com.me.walljumper.Constants;
@@ -8,7 +9,6 @@ import com.me.walljumper.WallJumper;
 import com.me.walljumper.game_objects.AbstractGameObject;
 import com.me.walljumper.game_objects.RiftFragment;
 import com.me.walljumper.game_objects.classes.Mage;
-import com.me.walljumper.game_objects.classes.Rogue;
 import com.me.walljumper.game_objects.terrain.Platform;
 import com.me.walljumper.game_objects.terrain.Portal;
 import com.me.walljumper.game_objects.terrain.traps.SpikeTrap;
@@ -90,7 +90,6 @@ public class LevelLoader {
 				if (BLOCK_TYPE.PLATFORM.sameColor(currentPixel) || BLOCK_TYPE.PLATFORM_START_DOWN_RIGHT.sameColor(currentPixel)) {
 					
 					
-					//S
 					if (isStartOfNewObject(pixelX, pixelY, BLOCK_TYPE.PLATFORM.color, BLOCK_TYPE.PLATFORM_START_RIGHT_DOWN.color) || BLOCK_TYPE.PLATFORM_START_DOWN_RIGHT.sameColor(currentPixel)) {
 						boolean putInFront = nextIsSameColor(pixelX + 1, pixelY, BLOCK_TYPE.PLATFORM.color);
 						
@@ -141,8 +140,7 @@ public class LevelLoader {
 						ScytheMan scytheMan = new ScytheMan(pixelX * 1,
 								baseHeight * 1, 63, 48);*/
 						Mage rogue = new Mage(pixelX * 1,
-								baseHeight, .19f, .31f, Constants.ROGUE_SCALE);
-						
+								baseHeight, .19f, .31f, Constants.ROGUE_SCALE, Controllers.getControllers().size > 0);
 						// Track him in these arrays
 						LevelStage.playerControlledObjects.add(rogue);
 						LevelStage.setPlayer(rogue);
@@ -330,6 +328,8 @@ public class LevelLoader {
 							World.controller.setSpawnPoint(this.position, false);
 						}
 					});
+					
+					
 				}else if(BLOCK_TYPE.PLAYER_CHECKPOINTLEFT.sameColor(currentPixel) && itIsStartOfNewObject(pixelX, pixelY,currentPixel)){
 					Vector2 newPixelXY = getDimension(pixelX, pixelY, currentPixel);
 					
@@ -340,25 +340,6 @@ public class LevelLoader {
 						}
 					});
 				}
-				
-					/*else if (BLOCK_TYPE.ENEMY_SPAWNPOINT.sameColor(currentPixel)) {
-				
-
-					
-					if (isStartOfNewObject(pixelX, pixelY, currentPixel)) {
-						for(int i = 0; i < 500; i++){
-							ScytheMan scytheMan = new ScytheMan(
-									pixelX + i, baseHeight, 63, 48);
-							scytheMan.setMovementSpeed(new Vector2((float)(Math.random()) * 200, 500));
-							MeleeEnemyAI ai = new MeleeEnemyAI(scytheMan, LevelStage.player);
-							scytheMan.addAI(ai);
-						
-						// Track him in these arrays
-						LevelStage.enemyControlledObjects.add(scytheMan);
-						}
-					}
-				}// end else if
-				*/
 			}// inner for loop
 		}// outer for loop
 	}// end of method

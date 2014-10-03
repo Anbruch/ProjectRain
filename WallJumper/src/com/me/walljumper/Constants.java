@@ -9,8 +9,8 @@ import com.me.walljumper.tools.Assets;
 
 public class Constants {
 
-	public static final float defaultZoom = .58f;
-	public static final float viewportWidth = 25.0f, viewportHeight = 25.0f,
+	public static final float defaultZoom = 1f;
+	public static final float viewportWidth = 50f, viewportHeight = viewportWidth / 16 * 9,
 			bgViewportWidth = 1280f, bgViewportHeight = 720f;
 	public static final String SKIN_UI = "ui/menuSkin.json";
 	public static final String TEXTURE_ATLAS_UI = "ui/MenuSkin.pack";
@@ -24,8 +24,12 @@ public class Constants {
 	public static final float sceneCamX = bgViewportWidth / 2;
 	public static final float sceneCamY = bgViewportHeight / 2;
 	public static final float cameraPanVal = 200;
-	public static final float gravity = -33;
+	public static final float gravity = -65;
 	public static final int maxRiftFragments = 18;
+	public static final float LEFT_LIMIT = -10;
+	public static final float BOT_LIMIT = 0;
+	public static final float RIGHT_LIMIT = 44.5f;
+	public static final float TOP_LIMIT = Constants.viewportHeight;
 	public static int lastSeenLevelInMenu = -1;
 
 	public static Array<String> givenStory;

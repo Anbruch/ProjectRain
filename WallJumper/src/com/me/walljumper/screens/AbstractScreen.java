@@ -1,10 +1,11 @@
 package com.me.walljumper.screens;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.math.Vector2;
 import com.me.walljumper.DirectedGame;
 import com.me.walljumper.ProfileLoader;
 import com.me.walljumper.WallJumper;
@@ -89,9 +90,7 @@ public abstract class AbstractScreen implements Screen{
 		game.setScreen(new MainMenu(game), transition);
 	}
 	public void backToHomeMenu() {
-		ScreenTransition transition = ScreenTransitionSlice.init(.6f, ScreenTransitionSlice.UP_DOWN, 10,
-				Interpolation.pow2Out);
-		game.setScreen(new WorldScreen(game), transition);
+		
 	}
 	public void handleTouchInputUp(int screenX, int screenY, int pointer,
 			int button) {
@@ -99,6 +98,15 @@ public abstract class AbstractScreen implements Screen{
 	}
 	public void handleKeyUp(int keycode) {
 		// TODO Auto-generated method stub
+		
+	}
+	public abstract void controllerButtonDown(int controllerNumber, int buttonIndex);
+	
+	
+	public void joyStick(int controllerNumber, Vector2 leftJoyStick, Vector2 rightJoyStick) {
+		
+	}
+	public void controllerButtonUp(int controllerNumber, int buttonIndex) {
 		
 	}
 

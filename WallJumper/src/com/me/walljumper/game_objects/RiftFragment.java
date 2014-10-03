@@ -24,7 +24,7 @@ public class RiftFragment extends AbstractGameObject {
 		image = animation.getKeyFrame(stateTime, looping);
 		
 		// Draw
-		if(onScreen || WallJumper.paused)
+		if(WallJumper.paused)
 		batch.draw(image.getTexture(), position.x, position.y, origin.x, origin.y,
 				dimension.x, dimension.y, 1, 1,
 				rotation, image.getRegionX(), image.getRegionY(),

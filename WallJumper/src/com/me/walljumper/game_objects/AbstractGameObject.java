@@ -41,7 +41,6 @@ public abstract class AbstractGameObject{
 	public boolean animationBool;
 	protected boolean flipX;
 	protected boolean flipY;
-	public boolean onScreen;
 	private float rotationalVelocity;
 	
 	public AbstractGameObject(){
@@ -95,12 +94,17 @@ public abstract class AbstractGameObject{
 		if(animation != null && animation.isAnimationFinished(stateTime)){
 			animationComplete();
 		}
-		onScreen = World.controller.cameraHelper.onScreen(this) ? true : false;
+		World.controller.cameraHelper.onScreen(this);
+		//onScreen = World.controller.cameraHelper.onScreen(this) ? true : false;
 			
 		updateMotionX(deltaTime);
 		updateMotionY(deltaTime);
 		updateRotation(deltaTime);
 		
+	}
+	public void setPosition(float x, float y){
+		position.x = x; position.y = y;
+		bounds.setPosition(position);
 	}
 	public void setRotationalVelocity(float rotationalVelocity){
 		this.rotationalVelocity = rotationalVelocity;
@@ -171,7 +175,6 @@ public abstract class AbstractGameObject{
 		currentFrameDimension.set(image.getRegionWidth() / 10f,
 				image.getRegionHeight() / 10f);
 		// Draw
-		if(onScreen)
 		batch.draw(image.getTexture(), position.x, position.y, origin.x, origin.y,
 				currentFrameDimension.x, currentFrameDimension.y, 1, 1,
 				rotation, image.getRegionX(), image.getRegionY(),

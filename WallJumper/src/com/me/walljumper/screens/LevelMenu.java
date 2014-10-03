@@ -8,6 +8,7 @@ import aurelienribon.tweenengine.TweenManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -207,6 +208,12 @@ public class LevelMenu extends AbstractScreen {
 
 	public boolean handleKeyInput(int keycode) {
 		return false;
+	}
+
+	@Override
+	public void controllerButtonDown(int controllerNumber, int buttonIndex) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

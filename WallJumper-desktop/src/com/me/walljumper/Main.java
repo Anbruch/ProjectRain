@@ -7,8 +7,8 @@ public class Main {
 	public static void main(String[] args) {
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 		cfg.title = "WallJumper";
-		cfg.width = 480;
-		cfg.height = 270;
+		cfg.width = 1280/3;
+		cfg.height = 720/3;
 		cfg.fullscreen = false;
 		new LwjglApplication(new WallJumper(), cfg);
 	}

@@ -2,6 +2,7 @@ package com.me.walljumper.screens;
 
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.me.walljumper.Constants;
@@ -90,6 +91,10 @@ public class TutorialScreen extends AbstractScreen {
 		ProfileLoader.profileLoader.saveProfile();
 		AudioManager.instance.stopMusic();
 		game.setScreen(new MainMenu(game), null);
+	}
+	@Override
+	public void controllerButtonDown(Controller controller, int buttonIndex) {
+		
 	}
 	
 	

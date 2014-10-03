@@ -5,5 +5,7 @@
 	<classpathentry kind="lib" path="libs/tween-engine-api-sources.jar"/>
 	<classpathentry kind="lib" path="libs/tween-engine-api.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="lib" path="C:/libgdx/extensions/gdx-controllers/gdx-controllers.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/libgdx/extensions/gdx-controllers/gdx-controllers-desktop-natives.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

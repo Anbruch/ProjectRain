@@ -262,7 +262,6 @@ public class WorldRenderer implements Disposable{
 			public void update(float deltaTime) {
 				super.update(0);
 				if(cur == down){
-					World.controller.cameraHelper.setTarget(null);
 					World.controller.cameraHelper.movePositionBy(new Vector2(0, 10));				
 				}
 
@@ -279,7 +278,6 @@ public class WorldRenderer implements Disposable{
 			public void update(float deltaTime) {
 				super.update(0);
 				if(cur == down){
-					World.controller.cameraHelper.setTarget(null);
 					World.controller.cameraHelper.movePositionBy(new Vector2(0, -10));				
 				}
 
@@ -296,7 +294,6 @@ public class WorldRenderer implements Disposable{
 			public void update(float deltaTime) {
 				super.update(0);
 				if(cur == down){
-					World.controller.cameraHelper.setTarget(null);
 					World.controller.cameraHelper.movePositionBy(new Vector2(-10, 0));				
 				}
 
@@ -312,7 +309,6 @@ public class WorldRenderer implements Disposable{
 			public void update(float deltaTime) {
 				super.update(0);
 				if(cur == down){
-					World.controller.cameraHelper.setTarget(null);
 					World.controller.cameraHelper.movePositionBy(new Vector2(10, 0));				
 				}
 

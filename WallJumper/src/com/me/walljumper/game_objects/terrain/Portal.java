@@ -55,7 +55,7 @@ public class Portal extends AbstractGameObject{
 	@Override
 	public void render(SpriteBatch batch) {
 		
-		if(onScreen || World.controller.renderAll){
+		if(World.controller.renderAll){
 		// get correct image and draw the current proportions
 		image = null;
 		image = animation.getKeyFrame(stateTime, looping);

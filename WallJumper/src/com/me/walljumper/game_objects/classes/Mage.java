@@ -23,14 +23,17 @@ public class Mage extends ManipulatableObject {
 
 	private boolean teleportAiming;
 	private Teleport teleport;
+	private float y;
 
 	
 
-
-	public Mage(){
-		
+	public Mage(boolean controller){
+		super(controller);
 	}
-	public Mage(float x, float y, float width, float  height, int scale){
+
+	
+	public Mage(float x, float y, float width, float  height, int scale, boolean controller){
+		super(controller);
 		init(x, y, width, height, scale);
 		
 	}
@@ -44,10 +47,12 @@ public class Mage extends ManipulatableObject {
 		
 		position.set(x, y);
 		acceleration.set(0, Constants.gravity);
-		moveSpeed = new Vector2(18f, 18f);
+		moveSpeed = new Vector2(60f, 15f);
+		JUMP_TIME = .3f;
+		wallJumpSpeedX = 7;
 		state = STATE.GROUNDED;
 		setAnimation(aniNormal);
-		terminalVelocity.set(10, 20);
+		terminalVelocity.set(15, 18);
 		dimension.set(width * scale, height * scale);
 		bounds.set(position.x, position.y, dimension.x, dimension.y - .2f);
 	}

@@ -1,5 +1,7 @@
 package com.me.walljumper;
 
+import Controllers.ControllerHandler;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
@@ -24,7 +26,7 @@ public class WallJumper extends DirectedGame {
 	
 	@Override
 	public void create() {	
-		
+		ControllerHandler.init();
 		((DirectedGame) Gdx.app.getApplicationListener()).setScreen(new MainMenu(this));
 		paused = false;
 	}

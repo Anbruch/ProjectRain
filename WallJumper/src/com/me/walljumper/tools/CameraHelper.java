@@ -27,8 +27,8 @@ public class CameraHelper {
 		zoom = Constants.defaultZoom;
 		zoomTarget = zoom;
 		targetSpot = new Vector2();
-		rect = new Rectangle(-5, 0, Constants.viewportWidth + 10,
-				Constants.viewportHeight);
+		rect = new Rectangle(Constants.LEFT_LIMIT, Constants.BOT_LIMIT, Constants.RIGHT_LIMIT,
+				Constants.TOP_LIMIT );
 	}
 
 	public void update(float deltaTime) {
@@ -44,15 +44,15 @@ public class CameraHelper {
 		
 		
 
-	
+	/*
 		if(targetSpot != null || hasTarget()){
 			float deltaX = !hasTarget() ? (targetSpot.x - position.x) / 10
 					: (target.position.x - position.x) / 10, deltaY = !hasTarget() ? (targetSpot.y - position.y) / 10
 					: (target.position.y - position.y) / 10;
 			position.x += deltaX;
-			position.y += deltaY;
+			position.y += deltaY;*/
 			
-			if(deltaX > 5 || deltaX < - 5 || deltaY > 5 || deltaY < - 5)
+			/*if(deltaX > 5 || deltaX < - 5 || deltaY > 5 || deltaY < - 5)
 				World.controller.camOnTarget = false;
 			else{
 				if(World.controller != null && hasTarget())
@@ -62,18 +62,29 @@ public class CameraHelper {
 		
 		rect.x += deltaX;
 		rect.y += deltaY;
-		}
+		}*/
 	}
-
+/*
 	public void setTarget(AbstractGameObject target) {
 		this.target = target;
 		this.targetSpot = null;
-	}
+	}*/
 
 	public boolean onScreen(AbstractGameObject obj) {
-		// Checks if camera bounds overlaps with
-		if (obj.bounds.overlaps(rect))
+		if(obj.bounds.contains(rect)){
 			return true;
+		}
+		// Checks if camera bounds overlaps with
+		if(obj.bounds.x > rect.x + rect.width ){
+			obj.setPosition(rect.x - obj.dimension.x, obj.position.y);
+		}else if(obj.bounds.x + obj.bounds.width < rect.x){
+			obj.setPosition(rect.x + rect.width, obj.position.y);
+			
+		}else if(obj.bounds.y + obj.dimension.y < rect.y){
+			obj.setPosition(obj.position.x, rect.y + rect.height);
+		}else if(obj.bounds.y > rect.y + rect.height){
+			obj.setPosition(obj.position.x, rect.y - obj.dimension.y);
+		}
 
 		return false;
 
@@ -81,9 +92,11 @@ public class CameraHelper {
 
 	public void setPosition(float x, float y) {
 		this.position.set(x, y);
+		rect.set(new Rectangle(x - Constants.viewportWidth / 2, y - Constants.viewportHeight / 2, Constants.viewportWidth, Constants.viewportHeight));
 		targetSpot = new Vector2(position);
-		rect.setPosition(x - Constants.viewportWidth / 2 - 5, y
-				- Constants.viewportHeight / 2);
+		/*rect.setPosition(x - Constants.viewportWidth / 2 - 5, y
+				- Constants.viewportHeight / 2);*/
+		
 
 	}
 
@@ -111,13 +124,13 @@ public class CameraHelper {
 		return target;
 	}
 
-	public boolean hasTarget() {
+	/*public boolean hasTarget() {
 		return target != null;
 	}
-
-	public boolean hasTarget(AbstractGameObject target) {
+*/
+	/*public boolean hasTarget(AbstractGameObject target) {
 		return hasTarget() && this.target.equals(target);
-	}
+	}*/
 
 	public void applyTo(OrthographicCamera camera) {
 		camera.position.x = this.position.x;

@@ -1,10 +1,13 @@
 package com.me.walljumper.screens;
 
+import Controllers.ControllerHandler;
+import Controllers.Xbox360;
 import aurelienribon.tweenengine.TweenManager;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
@@ -18,7 +21,6 @@ import com.me.walljumper.game_objects.abilities.Ability;
 import com.me.walljumper.game_objects.classes.ManipulatableObject;
 import com.me.walljumper.game_objects.terrain.Portal;
 import com.me.walljumper.gui.Button;
-import com.me.walljumper.gui.Image;
 import com.me.walljumper.gui.PauseButton;
 import com.me.walljumper.gui.SceneObject;
 import com.me.walljumper.tools.Assets;
@@ -28,7 +30,7 @@ import com.me.walljumper.tools.InputManager;
 import com.me.walljumper.tools.LevelStage;
 import com.me.walljumper.tools.WorldRenderer;
 
-public class World  {
+public class World {
 	public static World controller;
 	public CameraHelper cameraHelper;
 	public LevelStage levelStage;
@@ -42,7 +44,6 @@ public class World  {
 	public Button button;
 	public Array<Ability> activeAbilities;
 
-	
 	private ManipulatableObject from;
 	public AbstractGameObject to;
 	private DirectedGame game;
@@ -52,12 +53,11 @@ public class World  {
 	public boolean nextLevel;
 	public boolean backTolevelMenu;
 	public boolean camOnTarget;
-	
+
 	private Vector2 spawnPoint;
 	private boolean faceLeft;
 	public boolean backToHomeMenu;
-	
-	
+	private ControllerHandler controllerManager;
 
 	public World(DirectedGame game, AbstractScreen gameScreen) {
 		this.game = game;
@@ -65,52 +65,50 @@ public class World  {
 	}
 
 	public void init() {
-	
-		//PlayMusic
-		if(!AudioManager.instance.isPlaying())
+
+		// PlayMusic
+		if (!AudioManager.instance.isPlaying())
 			AudioManager.instance.playMusic(Assets.instance.music.world0);
-		
+
 		nextLevel = false;
 		backTolevelMenu = false;
 		riftFragCollected = false;
 		countDown = 0;
 		restart = false;
 		levelTimer = 0;
-		
-		//Init other necessary classes
+
+		// Init other necessary classes
 		WorldRenderer.renderer.init();
 		cameraHelper = new CameraHelper();// Essentially makes the camera follow
 		cameraHelper.setZoom(Constants.defaultZoom, true);
+
 		InputManager.inputManager.init();
 		levelStage = new LevelStage();
 		activeAbilities = new Array<Ability>();
 
-		
-		//USED AS IN GAME MENU DURING PLAY
+		// USED AS IN GAME MENU DURING PLAY
 		tween = new TweenManager();
-		
-		if(failedLoad){
+
+		if (failedLoad) {
 			failedLoad = false;
 			return;
 		}
-		
+
 		// have a player variable here
 		player = InputManager.inputManager.getPlayer();
-		if(spawnPoint != null)
+		if (spawnPoint != null)
 			player.position.set(spawnPoint);
-		
-		
-		
-		//Set up camera helper
-		cameraHelper.setTarget(LevelStage.player);
+
+		// Set up camera helper
+		cameraHelper.setPosition(Constants.viewportWidth / 2 + 10,
+				Constants.viewportHeight / 2 + 2);
 		cameraHelper.applyTo(WorldRenderer.renderer.camera);
-		cameraHelper.setPosition(LevelStage.player.position.x, LevelStage.player.position.y);
-		
-		//Set up pause button
+
+		// Set up pause button
 		WallJumper.paused = true;
 		WorldRenderer.renderer.pauseButton = new PauseButton();
 		WorldRenderer.renderer.pauseMenu();
-		
+
 		levelStage.update(0);
 		started = false;
 		blackHoled = false;
@@ -119,12 +117,12 @@ public class World  {
 	}
 
 	public void render(SpriteBatch batch) {
-		
+
 		levelStage.render(batch);
 	}
 
 	public void update(float deltaTime) {
-
+		ControllerHandler.controllerManager.update();
 		levelStage.update(deltaTime);
 		cameraHelper.update(deltaTime);
 		WorldRenderer.renderer.weather.update(deltaTime);
@@ -132,140 +130,145 @@ public class World  {
 		blackHoleMovement(deltaTime);
 		checkDeath();
 	}
-	
+
 	private void checkDeath() {
-		if(backTolevelMenu){
+		if (backTolevelMenu) {
 			gameScreen.backToLevelMenu();
-		}if(backToHomeMenu){
+		}
+		if (backToHomeMenu) {
 			gameScreen.backToHomeMenu();
-		} else if(restart){
+		} else if (restart) {
 			gameScreen.restartLevel();
-		}else if(nextLevel){
+		} else if (nextLevel) {
 			gameScreen.nextLevel();
-			System.out.println("ethsoenuh");
 		}
 	}
-	private void blackHoleMovement(float deltaTime){
-		if(from != null && !from.continueToHole(deltaTime)){
 
-			if(portal.isDeathPortal()){
+	private void blackHoleMovement(float deltaTime) {
+		if (from != null && !from.continueToHole(deltaTime)) {
+
+			if (portal.isDeathPortal()) {
 				gameScreen.restartLevel();
 				return;
-			}			
-			//Play the success screen, watch it out, it may run every from if from != null
+			}
+			// Play the success screen, watch it out, it may run every from if
+			// from != null
 			WorldRenderer.renderer.levelCompleteMenu();
 			from = null;
 		}
 	}
-	
-	public void setSpawnPoint(Vector2 spawnPoint, boolean faceLeft){
+
+	public void setSpawnPoint(Vector2 spawnPoint, boolean faceLeft) {
 		this.spawnPoint = spawnPoint;
 		this.faceLeft = faceLeft;
 	}
+
 	public void render(float delta) {
-		
-		renderAll = cameraHelper.zoom != Constants.defaultZoom ? true : renderAll;
-		//MAIN GAME UPDATE CALL
-		if (!WallJumper.paused && cameraHelper.zoom == Constants.defaultZoom && camOnTarget) {
+
+		renderAll = cameraHelper.zoom != Constants.defaultZoom ? true
+				: renderAll;
+		// MAIN GAME UPDATE CALL
+		if (!WallJumper.paused && cameraHelper.zoom == Constants.defaultZoom) {
 			renderAll = false;
 			delta = delta < .25f ? delta : .25f;
 
-			if(!blackHoled)
+			if (!blackHoled)
 				levelTimer += delta;
 
 			update(delta);
 
-		
-		//Update countdown
-		}else {
+			// Update countdown
+		} else {
 			controller.cameraHelper.update(delta);
 		}
-		
+
 		Gdx.gl.glClearColor(255, 255, 255, 0); // Default background color
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
-		if(WorldRenderer.renderer.camera != null){
+
+		if (WorldRenderer.renderer.camera != null) {
 			WorldRenderer.renderer.render();
 		}
 
 	}
-	public InputProcessor getInputProcessor(){
+
+	public InputProcessor getInputProcessor() {
 		return InputManager.inputManager;
 	}
-	public float getLevelTime(){
+
+	public float getLevelTime() {
 		return levelTimer;
 	}
 
 	public void resize(int width, int height) {
 		WorldRenderer.renderer.resize(width, height);
 	}
-	public boolean handleKeyInput(int keycode){
-		if(Keys.SPACE == keycode){
-			if(!started){
+
+	public boolean handleKeyInput(int keycode) {
+		if (Keys.SPACE == keycode) {
+			if (!started) {
 				startLevel();
 				return true;
 			}
 		}
-		
-		//Send input to the controlled objects
-		for(ManipulatableObject target:InputManager.inputManager.controllableObjects){
+
+		// Send input to the controlled objects
+		for (ManipulatableObject target : InputManager.inputManager.controllableObjects) {
 			target.actOnInputKeyDown(keycode);
 		}
-		
-		
-				
+
 		return true;
 	}
-	
-	//return false jumps back to handleTouchInput which 
-	//instantle goes to inputManager.touchInput or keyInput
-	private boolean startLevel(){
-		if(!started){
+
+	// return false jumps back to handleTouchInput which
+	// instantle goes to inputManager.touchInput or keyInput
+	private boolean startLevel() {
+		if (!started) {
 			levelTimer = 0;
 			WorldRenderer.renderer.pauseButton.play();
-			
-			started = true;			
-			
+
+			started = true;
+
 			return false;
 		}
 		return true;
 	}
-	//Return false to do a return in the method calling this
-	public boolean handleTouchInput(int screenX, int screenY, int pointer, int button) {
-		//Sends all touch down coordinates to the children
-		for(SceneObject objects : WorldRenderer.renderer.getSceneObjects()){
-			if(objects.touchDown(screenX, screenY, pointer, button)){
+
+	// Return false to do a return in the method calling this
+	public boolean handleTouchInput(int screenX, int screenY, int pointer,
+			int button) {
+		// Sends all touch down coordinates to the children
+		for (SceneObject objects : WorldRenderer.renderer.getSceneObjects()) {
+			if (objects.touchDown(screenX, screenY, pointer, button)) {
 				return false;
 			}
 		}
-		if(!startLevel())
+		if (!startLevel())
 			return false;
-		
-		
+
 		// Top left corner is a pause button
 		if (screenX < Gdx.graphics.getWidth() / 10
 				&& screenY < Gdx.graphics.getHeight() / 10 && !blackHoled) {
 			WorldRenderer.renderer.pauseButton.toggle();
 			return false;
-		//
-		}else if(WallJumper.paused){
+			//
+		} else if (WallJumper.paused) {
 			WorldRenderer.renderer.pauseButton.toggle();
 			return false;
 		}
-		
-		/*//send input to riftrunner   
-		for(ManipulatableObject target:InputManager.inputManager.controllableObjects){
-			target.actOnInputTouch(screenX, screenY, pointer, button);
-		}
-		*/
+
+		/*
+		 * //send input to riftrunner for(ManipulatableObject
+		 * target:InputManager.inputManager.controllableObjects){
+		 * target.actOnInputTouch(screenX, screenY, pointer, button); }
+		 */
 		return true;
-		
+
 	}
 
 	public void show() {
 		World.controller.init();
 		World.controller.setSpawnPoint(null, false);
-		
+
 	}
 
 	public void hide() {
@@ -298,8 +301,8 @@ public class World  {
 		from = null;
 		to = null;
 		cameraHelper.destroy();
-		if(levelStage != null)
-		levelStage.destroy();
+		if (levelStage != null)
+			levelStage.destroy();
 		activeAbilities.clear();
 		player = null;
 		riftFragCollected = false;
@@ -307,29 +310,52 @@ public class World  {
 		InputManager.inputManager.controllableObjects.clear();
 
 	}
-	//When called, automatically pauses game until countdown < 0
+
+	// When called, automatically pauses game until countdown < 0
 	public void countDown(float time) {
 		countDown = time;
 	}
-	
-	//Transitions into blackhole, only called once due to blackHoled bool
-	public void moveTowards(ManipulatableObject from, AbstractGameObject to, float time) {
-		if(!blackHoled){
+
+	// Transitions into blackhole, only called once due to blackHoled bool
+	public void moveTowards(ManipulatableObject from, AbstractGameObject to,
+			float time) {
+		if (!blackHoled) {
 			this.from = from;
 			this.to = to;
 			from.time = time;
 			from.stopMove();
-			from.velocity.set(0,0);
+			from.velocity.set(0, 0);
 			from.setAnimation(from.aniJumping);
 			blackHoled = true;
 			from.acceleration.set(0, 0);
 			from.moveToSomethingOverTime = time;
 			from.bhOriginPos = new Vector2(from.position);
-			from.deltaPosition = new Vector2(to.position.x + to.dimension.x / 2 - (from.position.x + from.dimension.x / 2) + .5f,
-					to.position.y + to.dimension.y / 2  - (from.position.y + from.dimension.y / 2) + .6f);
-		
+			from.deltaPosition = new Vector2(to.position.x + to.dimension.x / 2
+					- (from.position.x + from.dimension.x / 2) + .5f,
+					to.position.y + to.dimension.y / 2
+							- (from.position.y + from.dimension.y / 2) + .6f);
+
 		}
 	}
-	
-	
+
+	public void controllerButtonDown(int controllerNumber, int buttonIndex) {
+
+		InputManager.inputManager.controllableObjects.get(controllerNumber)
+				.buttonDown(buttonIndex);
+
+	}
+
+	public void controllerButtonUp(int controllerNumber, int buttonIndex) {
+
+		InputManager.inputManager.controllableObjects.get(controllerNumber)
+				.buttonUp(buttonIndex);
+	}
+
+	public void joyStick(int controllerNumber, Vector2 leftJoyStick,
+			Vector2 rightJoyStick) {
+		InputManager.inputManager.controllableObjects.get(controllerNumber)
+				.joyStick(leftJoyStick, rightJoyStick);
+
+	}
+
 }

@@ -107,7 +107,6 @@ public class LevelStage {
 		//Iterate and update all enemies, players, controllable objects
 		for(ManipulatableObject object: LevelStage.playerControlledObjects){
 			object.update(deltaTime);
-			object.fallingToDie(deltaTime);
 		}
 		//Render all of the enemy controlled objects
 		for(ManipulatableObject object: LevelStage.enemyControlledObjects){
@@ -134,8 +133,6 @@ public class LevelStage {
 		}
 		for(AbstractGameObject uncollidable: LevelStage.uncollidableObjects){
 			uncollidable.update(deltaTime);
-			if(!uncollidable.onScreen && uncollidable instanceof Projectile)
-				LevelStage.uncollidableObjects.removeValue(uncollidable, true);
 		}
 		
 		

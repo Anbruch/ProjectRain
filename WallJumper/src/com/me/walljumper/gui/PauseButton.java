@@ -39,9 +39,6 @@ public class PauseButton extends AbstractGameObject {
 		image = play;
 		WallJumper.paused = true;
 		WorldRenderer.renderer.pauseMenu();
-		if(World.controller.cameraHelper.hasTarget())
-			World.controller.cameraHelper.moveTowardsPosition(World.controller.cameraHelper.getTarget().position);
-		World.controller.cameraHelper.setTarget(null);
 		World.controller.renderAll = true;
 		
 	}
@@ -51,7 +48,6 @@ public class PauseButton extends AbstractGameObject {
 		WallJumper.paused = false;
 		image = pause;
 		World.controller.renderAll = false;
-		World.controller.cameraHelper.setTarget(InputManager.inputManager.getPlayer());
 		World.controller.cameraHelper.transitionToZoom(Constants.defaultZoom);
 		WorldRenderer.renderer.clearScene();
 		
